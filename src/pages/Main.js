@@ -5,12 +5,12 @@ import MetaTags from 'react-meta-tags';
 import jquery from 'jquery';
 import 'react-bootstrap'
 import {WOW} from 'wowjs'
-//import '../lib/easing/easing.min.js'
+
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
 //css
-import './MainTemplate.css';
+import './Main.css';
 // Bootstrap css
 import '../lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
@@ -23,13 +23,14 @@ import '../lib/modal-video/css/modal-video.min.css'
 // Main Style
 import '../css/responsive.css'
 
-class MainTemplate extends Component {
+class Main extends Component {
 
     componentDidMount(){
     
       window.$ = window.jQuery = jquery;
       require('hoverintent')
       require('superfish');
+      require("jquery-ui/ui/effects/effect-slide");
       require('react-owl-carousel')
       loadJqueryScript();
 
@@ -199,7 +200,7 @@ class MainTemplate extends Component {
 function loadJqueryScript() {
   jquery(document).ready(function( $ ) {
     $(window).scroll(function () {
-      var height = $(window).height();
+      //var height = $(window).height();
       var scroll = $(window).scrollTop();
       if (scroll) {
         $(".header-hide").addClass("scroll-header");
@@ -274,7 +275,7 @@ function loadJqueryScript() {
   
     // Smooth scroll for the menu and links with .scrollto classes
     $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
-      if (window.location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && window.location.hostname == this.hostname) {
+      if (window.location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && window.location.hostname === this.hostname) {
         var target = $(this.hash);
         if (target.length) {
           var top_space = 0;
@@ -334,4 +335,4 @@ function loadJqueryScript() {
 }
 
   
-export default MainTemplate;
+export default Main;

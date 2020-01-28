@@ -1,36 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from './pages/Header';
+import { Main, Auth, NotFound, Kit, Footer} from './pages/';
 
 function App() {
   return (
     //사용자 작성 코드
     <div className="App">
-      <Header/>
+      <Router>
+        <Header />
+        <Switch>
+        <Route path="/" exact={true} component={Main}/>
+        <Route path="/kit" exact={true} component={Kit}/>
+        <Route path='/auth/:kind' exact={true} component={Auth} />
+        <Route component={NotFound} />
+        </Switch>
+        <Footer />
+      </Router>
       {/* <MainTemplate>
         템플릿 완성
       </MainTemplate> */}
-      {this.props.children}
+      {/* {this.props.children} */}
     </div>
-    //기본코드
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
   );
 }
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Footer extends Component {
     
     render() {
-        const companyInfo = ['문의 032-715-7904', '</br>', '팩스 032-555-3629', '</br>', '메일 gutmorning2018@gmail.com'] 
+        const companyInfo = ['문의 032-715-7904', <br/>, '팩스 032-555-3629', <br/>, '메일 gutmorning2018@gmail.com'] 
         return (
             <footer class="footer">
     <div class="container">
