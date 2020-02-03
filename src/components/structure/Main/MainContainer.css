@@ -21,7 +21,6 @@ h2 {
   color: #000;
   font-weight: 600;
 }
-
 h4 {
   color: #000;
   font-size: 13px;
@@ -195,7 +194,7 @@ span {
 #hero {
   width: 100%;
   height: calc(100vh - 40px);
-  background: url(../img/hero-bg.png) center bottom no-repeat;
+  background: url(../../../assets/img/hero-bg.png) center bottom no-repeat;
   background-size: 100%;
   position: relative;
   margin-top: 40px;
@@ -727,7 +726,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 /* Video Section
 --------------------------------*/
 /* #video {
-  background: url(../img/video-bg.jpg) center center;
+  background: url(assets/img/video-bg.jpg) center center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 400px;
@@ -1122,7 +1121,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 /* Newsletter Section
 --------------------------------*/
 #newsletter {
-  background: transparent url(../img/newsletter-bg.jpg) no-repeat center top fixed;
+  background: transparent url(../../../assets/img/newsletter-bg.jpg) no-repeat center top fixed;
   background-size: cover;
 }
 
@@ -1433,7 +1432,7 @@ body.mobile-nav-active #mobile-nav-toggle i {
 --------------------------------*/
 /* #call-to-action {
   overflow: hidden;
-  background: linear-gradient(rgba(29, 200, 205, 0.65), rgba(29, 205, 89, 0.2)), url(../img/call-to-action-bg.jpg) fixed center center;
+  background: linear-gradient(rgba(29, 200, 205, 0.65), rgba(29, 205, 89, 0.2)), url(assets/img/call-to-action-bg.jpg) fixed center center;
   background-size: cover;
   padding: 80px 0;
 } */
@@ -1618,4 +1617,8 @@ body.mobile-nav-active #mobile-nav-toggle i {
   
   .main-wrapper {
     min-height: 5rem;
+  }
+
+  .new-line {
+    white-space: pre-line;
   }

@@ -16,6 +16,118 @@ const INITIALIZE_INPUT = 'auth/INITIALIZE_INPUT';
 
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
 
+const CHECK_USER = 'auth/CHECK_USER';
+const CHECK_USER_SUCCESS = 'auth/CHECK_USER_SUCCESS';
+const CHECK_USER_FAILURE = 'auth/CHECK_USER_FAILURE';
+
+const SET_USER_TEMP = 'auth/SET_USER_TEMP';
+
+const LOGOUT = "auth/LOGOUT";
+const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
+const LOGOUT_FAILURE = 'auth/LOGOUT_FAILURE';
+
+export const logout = () => (
+    {
+    type: LOGOUT
+});
+
+export const logoutSuccess = () => ({
+    type: LOGOUT_SUCCESS
+});
+
+export const logoutFailure = () => ({
+    type: LOGOUT_FAILURE
+});
+
+const logoutEpic = (action$, state$) => {
+    return action$.pipe(
+        ofType(LOGOUT),
+        withLatestFrom(state$),
+        mergeMap(([action, state])=> {
+            console.log('logout')
+            const token = localStorage.getItem('userInfo')
+                ? JSON.parse(localStorage.getItem('userInfo')).token
+                : null;
+            return ajax
+                .post(
+                    `/api/auth/logout/`,
+                    // post의 body를 비워놓는다.
+                    {},
+                    {
+                        'Content-Type': 'application/json',
+                        Authorization: `token ${token}`
+                    }
+                )
+                .pipe(
+                    map(response => {
+                        // success시 localStorage에서 userInfo 삭제.
+                        localStorage.removeItem('userInfo');
+                        return logoutSuccess();
+                    }),
+                    catchError(error => {
+                        of({
+                            type: LOGIN_FAILURE,
+                            payload: error,
+                            error: true
+                        });
+                    })
+                );
+        })
+    )
+}
+
+export const checkUser = () => ({
+    type: CHECK_USER
+});
+
+export const checkUserSuccess = () => ({
+    type: CHECK_USER_SUCCESS
+});
+
+export const checkUserFailure = error => ({
+    type: CHECK_USER_FAILURE,
+    payload: {
+        error
+    }
+});
+
+export const setUserTemp = ({ id, username, token }) => ({
+    type: SET_USER_TEMP,
+    payload: {
+        id,
+        username,
+        token
+    }
+});
+
+const checkUserEpic = (action$, state$) => {
+    return action$.pipe(
+        ofType(CHECK_USER),
+        withLatestFrom(state$),
+        mergeMap(([action, state]) => {
+            const token = localStorage.getItem('userInfo')
+            ? JSON.parse(localStorage.getItem('userInfo')).token
+            : null;
+            return ajax
+                .get(`/api/auth/user/`, {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${token}`
+                })
+                .pipe(
+                    map(response => {
+                        return checkUserSuccess();
+                    }),
+                    catchError(error =>
+                        of({
+                            type: CHECK_USER_FAILURE,
+                            payload: error,
+                            error: true
+                        }))
+                );
+        })
+    );
+};
+
 export const register = () => (
     {
     type: REGISTER
@@ -65,7 +177,7 @@ const registerEpic = (action$, state$) => {
       withLatestFrom(state$),
       mergeMap(([action, state]) => {
         const { username, password } = state.auth.form;
-        return ajax.post('/api/auth/register/', { username, password }).pipe(
+        return ajax.post(`/api/auth/register/`, { username, password }).pipe(
           map(response => {
             const { user, token } = response.response;
             return registerSuccess({ user, token });
@@ -136,102 +248,148 @@ const initialState = {
 
 export const auth = (state = initialState, action) => {
     switch (action.type) {
-      case INITIALIZE_INPUT:
-        return {
-          ...state,
-          form: {
-            username: "",
-            password: ""
-          }
+        case INITIALIZE_INPUT:
+            return {
+                ...state,
+                form: {
+                username: "",
+                password: ""
+            }
         };
-      case CHANGE_INPUT:
-        let newForm = state.form;
-        newForm[action.payload.name] = action.payload.value;
-        return {
-          ...state,
-          form: newForm
+        case CHANGE_INPUT:
+            let newForm = state.form;
+            newForm[action.payload.name] = action.payload.value;
+            return {
+                ...state,
+                form: newForm
+            };
+        case INITIALIZE_ERROR:
+            return {
+                ...state,
+                error: {
+                triggered: false,
+                message: ""
+            }
         };
-      case INITIALIZE_ERROR:
-        return {
-          ...state,
-          error: {
-            triggered: false,
-            message: ""
-          }
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                logged: true,
+                userInfo: {
+                    id: action.payload.user.id,
+                    username: action.payload.user.username,
+                    token: action.payload.token
+            }
         };
-      case REGISTER_SUCCESS:
-        return {
-          ...state,
-          logged: true,
-          userInfo: {
-            id: action.payload.user.id,
-            username: action.payload.user.username,
-            token: action.payload.token
-          }
-        };
-      case REGISTER_FAILURE:
-        switch (action.payload.status) {
-          case 400:
+        case REGISTER_FAILURE:
+            switch (action.payload.status) {
+                case 400:
+                    return {
+                        ...state,
+                        error: {
+                        triggered: true,
+                        message: "WRONG USERNAME OR PASSWORD"
+                    }
+                };
+            case 500:
+                return {
+                    ...state,
+                    error: {
+                        triggered: true,
+                        message: "TOO SHORT USERNAME OR PASSWORD"
+                    }
+                };
+            default:
+                return {
+                    ...state
+                };
+            }
+        case LOGIN_SUCCESS:
             return {
-              ...state,
-              error: {
-                triggered: true,
-                message: "WRONG USERNAME OR PASSWORD"
-              }
+                ...state,
+                logged: true,
+                userInfo: {
+                    id: action.payload.user.id,
+                    username: action.payload.user.username,
+                    token: action.payload.token
+                }
             };
-          case 500:
+        case LOGIN_FAILURE:
+            switch (action.payload.status) {
+                case 400:
+                    return {
+                        ...state,
+                        error: {
+                            triggered: true,
+                            message: "WRONG USERNAME OR PASSWORD"
+                        }
+                    };
+                case 500:
+                    return {
+                        ...state,
+                        error: {
+                            triggered: true,
+                            message: "PLEASE TRY AGAIN"
+                        }
+                    };
+                default:
+                    return {
+                        ...state
+                    };
+            }
+        
+        case CHECK_USER_SUCCESS:
             return {
-              ...state,
-              error: {
-                triggered: true,
-                message: "TOO SHORT USERNAME OR PASSWORD"
-              }
+                ...state
             };
-          default:
+        case CHECK_USER_FAILURE:
             return {
-              ...state
-            };
-        }
-      case LOGIN_SUCCESS:
-        return {
-          ...state,
-          logged: true,
-          userInfo: {
-            id: action.payload.user.id,
-            username: action.payload.user.username,
-            token: action.payload.token
-          }
-        };
-      case LOGIN_FAILURE:
-        switch (action.payload.status) {
-          case 400:
+                ...state,
+                logged: false,
+                userInfo: {
+                    id: null,
+                    username: "",
+                    token: null
+                }
+            }
+        case SET_USER_TEMP:
             return {
-              ...state,
-              error: {
-                triggered: true,
-                message: "WRONG USERNAME OR PASSWORD"
-              }
+                ...state,
+                logged: true,
+                userInfo: {
+                    id: action.payload.id,
+                    username: action.payload.username,
+                    token: action.payload.token
+                }
             };
-          case 500:
+
+        case LOGOUT_SUCCESS:
             return {
-              ...state,
-              error: {
-                triggered: true,
-                message: "PLEASE TRY AGAIN"
-              }
+                ...state,
+                logged: false,
+                userInfo: {
+                    id: null,
+                    message: "",
+                    token: null
+                }
             };
-          default:
-            return {
-              ...state
-            };
-        }
-  
-      default:
-        return state;
+        
+        case LOGOUT_FAILURE:
+            return{
+                ...state,
+                error: {
+                    triggered: true,
+                    message: "LOGOUT ERROR, PLEASE TRY AGAIN"
+                }
+            }
+        default:
+            return state;
     }
   };
 
 export const authEpics = {
     registerEpic,
-    loginEpic
+    loginEpic,
+    checkUserEpic,
+    logoutEpic,
 };

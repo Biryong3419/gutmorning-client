@@ -10,8 +10,25 @@ export class AuthContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    // 하단에 AuthContainer를 withRouter로 감쌌기 때문에, history를 props로 이용할 수 있다.
+    const { history } = this.props;
+
     if (prevProps.kind !== this.props.kind) {
       this.initialize();
+    }
+
+    if (prevProps.logged !== this.props.logged && this.props.logged) {
+        //logged가 true가 되면 localStorage에 값을 저장합니다.
+        localStorage.setItem(
+            "userInfo",
+            JSON.stringify({
+                id: this.props.userInfo.id,
+                username: this.props.userInfo.username,
+                token: this.props.userInfo.token
+            })
+        );
+        // 값을 저장 후, main페이지로 이동시켜준다.
+        history.push("/");
     }
   }
 

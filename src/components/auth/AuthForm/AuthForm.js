@@ -33,16 +33,25 @@ const AuthForm = ({
       }
     }
   };
+
+  let title=''
+  if (kind == 'register') {
+    title = '회원등록';
+  }
+  else if (kind =='login') {
+    title = '로그인';
+  }
+
   return (
     <div className={cx("auth-form")}>
-      <div className={cx("title")}>{kind.toUpperCase()}</div>
+      <div className={cx("title")}>GutMorning</div>
       <div className={cx("error")}>
         {error.triggered && (
           <div className={cx("message")}>{error.message}</div>
         )}
       </div>
       <div className={cx("line-wrapper")}>
-        <div className={cx("input-title")}>username</div>
+        <div className={cx("input-id")}>이메일 주소</div>
         <input
           type="text"
           name="username"
@@ -52,7 +61,7 @@ const AuthForm = ({
         />
       </div>
       <div className={cx("line-wrapper")}>
-        <div className={cx("input-title")}>password</div>
+        <div className={cx("input-pass")}>비밀번호</div>
         <input
           type="password"
           name="password"
@@ -63,22 +72,23 @@ const AuthForm = ({
       </div>
       {kind === "register" ? (
         <div className={cx("auth-button")} onClick={onRegister}>
-          {kind.toUpperCase()}
+          {title}
         </div>
       ) : (
         <div className={cx("auth-button")} onClick={onLogin}>
-          {kind.toUpperCase()}
+          {title}
         </div>
       )}
       {kind === "register" ? (
-        <Link to={'/auth/login'} className={cx("description")}>
+        <Link to={`/auth/login`} className={cx("description")}>
           if you already have account...
         </Link>
       ) : (
-        <Link to={'/auth/register'} className={cx("description")}>
+        <Link to={`/auth/register`} className={cx("description")}>
           if you don't have an account...
         </Link>
       )}
+          <a className="return" href="/">메인화면 돌아가기</a>
     </div>
   );
 };

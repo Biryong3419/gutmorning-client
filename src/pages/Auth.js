@@ -7,7 +7,7 @@ const Auth = ({ match }) => {
     return (
         <div>
             <AuthContainer kind = {kind} />
-            <a href="/">메인화면 돌아가기</a>
+            
         </div>
        
     );

@@ -2,11 +2,12 @@ import React from 'react';
 import './App.css';
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
-import Header from './pages/Header';
-import { Main, Auth, NotFound, Kit, Footer} from './pages/';
+import { Main, Auth, NotFound, Kit} from './pages/';
 
 import { Provider } from "react-redux";
 import store from "./store/configure";
+
+import BaseContainer from './containers/BaseContainer';
 
 function App() {
   return (
@@ -14,16 +15,13 @@ function App() {
     <Provider store={store}>
     <div className="App">
       <Router>
-        <Header />
         <Switch>
         <Route path="/" exact={true} component={Main}/>
         <Route path="/kit" exact={true} component={Kit}/>
-        
-      
         <Route path='/auth/:kind' exact={true} component={Auth} />
         <Route component={NotFound} />
         </Switch>
-        <Footer />
+        <BaseContainer />
        
       </Router>
     </div>

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import './Footer.css';
 
 class Footer extends Component {
     
     render() {
-      if(window.location.pathname==='/auth/login' || window.location.pathname==='/auth/register'){
-        return null;
-      }   
-        const companyInfo = ['문의 032-715-7904', <br/>, '팩스 032-555-3629', <br/>, '메일 gutmorning2018@gmail.com'] 
+      // Disable footer
+      // if(window.location.pathname==='/auth/login' || window.location.pathname==='/auth/register'){
+      //   return null;
+      // }   
         return (
             <footer className="footer">
     <div className="container">
@@ -17,7 +18,11 @@ class Footer extends Component {
 
             <a className="navbar-brand" href="#">Gutmorning</a>
             {/* <p>문의 032-715-7904 <br>팩스 032-555-3629<br>메일 gutmorning2018@gmail.com</p> */}
-            <p>{companyInfo}</p>
+            <p className='new-line'>{
+            `문의 032-715-7904
+            팩스 032-555-3629
+            메일 gutmorning2018@gmail.com`
+            }</p>
           </div>
         </div>
 
