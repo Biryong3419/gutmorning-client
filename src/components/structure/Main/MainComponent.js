@@ -10,7 +10,7 @@ import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
 //css
-import './MainContainer.css';
+import './MainComponent.css';
 // Bootstrap css
 import 'lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
@@ -47,11 +47,6 @@ class Main extends Component {
     render() {
       
         let message = 'Gut Morning 장내 미생물 분석은 차세대 염기서열 분석법을 이용해 \n장에 어떤 종류의 미생물이 얼마나 살고 있는지를 분석하여 \n개인별 맞춤 건강 정보 및 장 건강 개선을 위한 솔루션을 제공해드리는 분석입니다.';
-        const lines = []
-        for (var item of message.split('\n')) {
-          lines.push(item)
-          lines.push(<br/>)
-        }
         let message2 = '비만과 만성변비 또는\n 잦은 설사로 고생하시는 분'
         return (
             <main>
@@ -67,7 +62,7 @@ class Main extends Component {
                     <div className="hero-container">
                         <h1>장내미생물 분석이란?</h1>
 	                    <h3>&nbsp;</h3>
-                        <h2>{lines}</h2>
+                        <h2 className='new-line'>{message}</h2>
                         <img src={require('assets/img/hero-img.png')} alt="Hero Imgs"/>
                         <a href="#mathcing" className="btn-get-started scrollto">Get Started</a>
                     </div>
@@ -132,7 +127,7 @@ class Main extends Component {
                                 <div className="feature-block">
                                     <img src={require('assets/img/svg/1.svg')} alt="img" className="img-fluid"/>
                                     <h4>Weight loss solutions</h4>
-                                    <p>{message2} </p>
+                                    <p className='new-line'>{message2} </p>
                                 </div>
                             </div>
                             <div className="col-md-6 col-lg-3">

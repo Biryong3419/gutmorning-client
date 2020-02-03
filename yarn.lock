@@ -1337,7 +1337,7 @@
     pretty-format "^24.9.0"
     wait-for-expect "^3.0.0"
 
-"@testing-library/jest-dom@^4.2.4":
+"@testing-library/jest-dom@^4.1.2", "@testing-library/jest-dom@^4.2.4":
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-4.2.4.tgz#00dfa0cbdd837d9a3c2a7f3f0a248ea6e7b89742"
   integrity sha512-j31Bn0rQo12fhCWOUWy9fl7wtqkp7In/YP2p5ZFyRuiiB9Qs3g+hS4gAmDWONbAHcRmVooNJ5eOHQDCOmUFXHg==
@@ -1352,7 +1352,7 @@
     pretty-format "^24.0.0"
     redent "^3.0.0"
 
-"@testing-library/react@^9.3.2":
+"@testing-library/react@^9.3.0", "@testing-library/react@^9.3.2":
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-9.4.0.tgz#b021ac8cb987c8dc54c6841875f745bf9b2e88e5"
   integrity sha512-XdhDWkI4GktUPsz0AYyeQ8M9qS/JFie06kcSnUVcpgOwFjAu9vhwR83qBl+lw9yZWkbECjL8Hd+n5hH6C0oWqg==
@@ -10015,6 +10015,16 @@ react-addons-css-transition-group@^15.5.2:
   dependencies:
     react-transition-group "^1.2.0"
 
+react-alert@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/react-alert/-/react-alert-6.0.0.tgz#892405f87b1e8c51de00a2cf9c92a72ca32814cc"
+  integrity sha512-Y9zbMUlE70VmW87R8T4DHnEecWVFyl0ITkDf93XOO/2U38etAYheUlihileVnNYFvlrWE4SpPJk4AWLOvAqYPg==
+  dependencies:
+    "@testing-library/jest-dom" "^4.1.2"
+    "@testing-library/react" "^9.3.0"
+    prop-types "^15.7.2"
+    react-transition-group "^4.3.0"
+
 react-app-polyfill@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.5.tgz#59c7377a0b9ed25692eeaca7ad9b12ef2d064709"
@@ -10275,7 +10285,7 @@ react-transition-group@^1.2.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-transition-group@^4.0.0:
+react-transition-group@^4.0.0, react-transition-group@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
   integrity sha512-1qRV1ZuVSdxPlPf4O8t7inxUGpdyO5zG9IoNfJxSO0ImU2A1YWkEQvFPuIPZmMLkg5hYs7vv5mMOyfgSkvAwvw==

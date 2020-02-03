@@ -30,17 +30,18 @@ export class BaseContainer extends Component {
                 username: userInfo.username,
                 token: userInfo.token
             });
+            checkUser();
             return;
         }
         
         // 만약 userInfo값이 localStorage에 없을 때에는, api통신 진행.
-        checkUser();
+        
 
         // 만약 checkUser가 실패할 경우, logged는 false로 바뀌므로, 로그인 페이지로 이동한다.
         // 또한, /auth/register에서는 /auth/login으로 이동할 필요가 없으므로, auth라는 path가 url에 포함될때는 제외 시킨다.
-        if(!this.props.logged && !window.location.pathname.includes("auth")) {
-            history.push("/auth/login");
-        }
+        // if(!this.props.logged && !window.location.pathname.includes("auth")) {
+        //     history.push("/auth/login");
+        // }
     };
 
     render() {

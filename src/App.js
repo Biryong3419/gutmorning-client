@@ -20,8 +20,9 @@ function App() {
         <Route path="/kit" exact={true} component={Kit}/>
         <Route path='/auth/:kind' exact={true} component={Auth} />
         <Route component={NotFound} />
-        </Switch>
         <BaseContainer />
+        </Switch>
+       
        
       </Router>
     </div>

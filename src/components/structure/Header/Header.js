@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import styles from "./Header.scss";
 import classNames from "classnames/bind";
-import { MdLock } from "react-icons/md";
+
+
 
 const cx = classNames.bind(styles);
 class Header extends Component {
@@ -30,7 +31,7 @@ class Header extends Component {
                   {/* <li><a href="kit.html"><b>Kit검사</b></a></li> */}
                   <li><Link to="kit"><b>Kit검사</b></Link></li>
                   <li><a href="http://gutmorning.co.kr/wp/"><b>마이크로바이옴 소식</b></a></li>
-                  <li><Link className='loginAnchor' to={this.props.toUrl} onClick={this.props.onLoginOut}>{this.props.loginStatus}</Link></li>
+                  <li><a className='loginAnchor' onClick={this.props.onLoginOut}>{this.props.loginStatus}</a></li>
               </ul> 
              
           </nav>
