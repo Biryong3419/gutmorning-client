@@ -3,7 +3,8 @@ import MetaTags from 'react-meta-tags';
 
 //JavaScript Libraries
 import jquery from 'jquery';
-import 'react-bootstrap'
+// import 'react-bootstrap'
+import 'bootstrap'
 import {WOW} from 'wowjs'
 
 import ModalVideo from 'modal-video';
@@ -204,6 +205,8 @@ class Main extends Component {
                                     <h3>첫째,</h3>
                                     <p className='new-line'>{`
                                     혼자서도 쉽게 사용할 수 있는 키트를 제공합니다.
+                                    
+
                                     `}</p>
                                   </div>
                                 </div>
@@ -213,7 +216,9 @@ class Main extends Component {
                                     <h3>둘째,</h3>
                                     <p className='new-line'>{`
                                     세계적으로 인정된 미생물 유전체 데이터 베이스를 
-                                    이용하여 정확한 미생물 분석을 수행합니다.`}</p>
+                                    이용하여 정확한 미생물 분석을 수행합니다.
+
+                                    `}</p>
                                   </div>
                                 </div>
 
@@ -223,7 +228,9 @@ class Main extends Component {
                                     <h3>셋째,</h3>
                                     <p className='new-line'>{`
                                     누적된 한국인 장내미생물 분석 결과를 이용하여 
-                                    한국인 맞춤 분석 결과를 제공 합니다.`}</p>
+                                    한국인 맞춤 분석 결과를 제공 합니다.
+
+                                    `}</p>
                                   </div>
                                 </div>
 
@@ -247,7 +254,7 @@ class Main extends Component {
   {/* <!--==========================
     Blog Section
   ============================--> */}
-  {/* <section id="blog" className="padd-section wow fadeInUp">
+  <section id="blog" className="padd-section wow fadeInUp">
 
     <div className="container">
       <div className="section-title text-center">
@@ -261,39 +268,39 @@ class Main extends Component {
       <div className="row">
         <div className="col-md-3 col-lg-3 wow bounceInUp" data-wow-duration="1.4s">
           <div className="block-blog text-left">
-             <img src="img/analysis-02.png" alt="img">
+             <img src={require('assets/img/analysis-02.png')} alt="img"/>
 
           </div>
         </div>
 
         <div className="col-md-3 col-lg-3">
           <div className="block-blog text-left wow bounceInUp" data-wow-delay="0.4s" data-wow-duration="1.4s">
-            <img src="img/analysis-03.png" alt="img">
+            <img src={require('assets/img/analysis-03.png')} alt="img"/>
            
           </div>
         </div>
 
         <div className="col-md-3 col-lg-3">
           <div className="block-blog text-left wow bounceInUp" data-wow-delay="0.8s" data-wow-duration="1.4s">
-            <img src="img/analysis-04.png" alt="img">
+            <img src={require('assets/img/analysis-04.png')} alt="img"/>
           </div>
         </div>
         
         <div className="col-md-3 col-lg-3">
           <div className="block-blog text-left wow bounceInUp" data-wow-delay="1.2s" data-wow-duration="1.4s">
-            <img src="img/analysis-05.png" alt="img">
+            <img src={require('assets/img/analysis-05.png')} alt="img"/>
           </div>
         </div>
       </div>
     </div>
-  </section> */}
+  </section>
   
   
 
   {/* <!--==========================
     Newsletter Section
   ============================--> */}
-  {/* <section id="newsletter" className="newsletter text-center wow fadeInUp">
+  <section id="newsletter" className="newsletter text-center wow fadeInUp">
     <div className="overlay padd-section">
       <div className="container">
 
@@ -309,9 +316,8 @@ class Main extends Component {
 
       </div>
     </div>
-  </section> */}
-
-            </main>
+  </section>
+</main>
         );
     }
 }
