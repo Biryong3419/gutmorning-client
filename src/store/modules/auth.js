@@ -232,7 +232,7 @@ export const changeInput= ({name, value}) => ({
 const initialState = {
     form: {
       username: "",
-      password: ""
+      password: "",
     },
     error: {
       triggered: false,

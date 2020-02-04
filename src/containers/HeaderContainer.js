@@ -6,6 +6,8 @@ import { useAlert } from 'react-alert'
 import { withRouter } from 'react-router';
 
 export class HeaderContainer extends Component {
+
+
     handleLoginOut = () => {
         const { logout } = this.props;
         const { logged } = this.props;
@@ -23,8 +25,9 @@ export class HeaderContainer extends Component {
         const { handleLoginOut } = this;
         const { logged } = this.props;
         let loginStatus = "로그인";
+        console.log(logged);
         if (logged) {
-           
+            
             loginStatus = "로그아웃";
         }else {
             loginStatus = "로그인";

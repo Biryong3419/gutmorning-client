@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AuthForm from "../components/auth/AuthForm";
+import AuthForm from "components/auth/AuthForm";
 import { withRouter } from "react-router-dom";
-import * as authActions from "../store/modules/auth";
+import * as authActions from "store/modules/auth";
 
 export class AuthContainer extends Component {
   componentDidMount() {
@@ -53,11 +53,10 @@ export class AuthContainer extends Component {
     register();
   };
   render() {
-    const { kind, username, password, error } = this.props;
+    const { username, password, error } = this.props;
     const { handleChangeInput, handleLogin, handleRegister } = this;
     return (
       <AuthForm
-        kind={kind}
         username={username}
         password={password}
         onChangeInput={handleChangeInput}

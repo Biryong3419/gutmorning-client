@@ -7,7 +7,6 @@ const Auth = ({ match }) => {
     return (
         <div>
             <AuthContainer kind = {kind} />
-            
         </div>
        
     );
