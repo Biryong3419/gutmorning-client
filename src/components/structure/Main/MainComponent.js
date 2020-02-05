@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MetaTags from 'react-meta-tags';
 
+
 //JavaScript Libraries
 import jquery from 'jquery';
 // import 'react-bootstrap'
@@ -10,7 +11,7 @@ import {WOW} from 'wowjs'
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
-import AlertComponent from 'components/AlertComponent';
+
 
 //css
 import './MainComponent.css';

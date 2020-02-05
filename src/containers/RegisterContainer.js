@@ -3,19 +3,29 @@ import { connect } from "react-redux";
 import RegisterForm from "components/auth/RegisterForm";
 import { withRouter } from "react-router-dom";
 import * as authActions from "store/modules/auth";
-
+import Popup from 'reactjs-popup';
 import 'bootstrap'
 import 'lib/bootstrap/css/bootstrap.css'
 
 export class RegisterContainer extends Component {
     state = {
-        confirmPassword: ''
+        confirmPassword: '',
+        open: false ,
+        registerMessage : ''
     }
-
+    openModal = this.openModal.bind(this);
+    closeModal = this.closeModal.bind(this);
+    openModal() {
+        this.setState({ open: true });
+      }
+    closeModal() {
+        this.setState({ open: false });
+    }
     componentDidMount() {
+        this.openModal();
         this.initialize();
     }
-
+    
     componentDidUpdate(prevProps, prevState) {
         // 하단에 AuthContainer를 withRouter로 감쌌기 때문에, history를 props로 이용할 수 있다.
         const { history } = this.props;
@@ -54,12 +64,14 @@ export class RegisterContainer extends Component {
         const { confirmPassword } = this.state;
         if (confirmPassword) {
             if (!this.doesPasswordMatch()) {
+                this.setState({registerMessage:'비밀번호가 일치하지 않습니다.'});
+                this.openModal();
             return(
               <div className="invalid-feedback d-block">패스워드가 일치하지 않습니다</div>
             );
           }else {
             const { register } = this.props;
-           // register();
+            register();
           }
         }else {
             console.log('');
@@ -104,6 +116,18 @@ export class RegisterContainer extends Component {
         const { confirmPassword } = this.state;
         return (
             <div>
+        <Popup
+          open={this.state.open}
+          closeOnDocumentClick
+          onClose={this.closeModal}
+        >
+          <div className="modal1">
+            <a className="close1" onClick={this.closeModal}>
+              &times;
+            </a>
+            {this.state.registerMessage}
+          </div>
+        </Popup>
           <RegisterForm
             username={username}
             password={password}
@@ -116,7 +140,6 @@ export class RegisterContainer extends Component {
             error={error}
             renderFeedbackMessage = {this.renderFeedbackMessage()}
           />
-         
           </div>
         );
       }
