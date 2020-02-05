@@ -5,18 +5,16 @@ import MetaTags from 'react-meta-tags';
 //JavaScript Libraries
 import jquery from 'jquery';
 // import 'react-bootstrap'
-import 'bootstrap'
+//import 'bootstrap'
 import {WOW} from 'wowjs'
 
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
-
-
 //css
 import './MainComponent.css';
 // Bootstrap css
-import 'lib/bootstrap/css/bootstrap.css'
+//import 'lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
 import 'lib/nivo-slider/css/nivo-slider.css'
 import 'lib/owlcarousel/assets/owl.carousel.css'

@@ -4,8 +4,8 @@ import RegisterForm from "components/auth/RegisterForm";
 import { withRouter } from "react-router-dom";
 import * as authActions from "store/modules/auth";
 import Popup from 'reactjs-popup';
-import 'bootstrap'
-import 'lib/bootstrap/css/bootstrap.css'
+//import 'bootstrap'
+//import 'lib/bootstrap/css/bootstrap.css'
 
 export class RegisterContainer extends Component {
     state = {
