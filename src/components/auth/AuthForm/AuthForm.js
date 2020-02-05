@@ -28,7 +28,6 @@ const AuthForm = ({
   const [passwordEntered, setPasswordEntered] = useState('');
   const [errorMessage2, setErrorMessage2] = useState('');
   const renderFeedbackMessage = () => {
-    console.log('@#!@#')
     if (errorMessage2.length>0) {
         return(
           <div className="invalid-feedback d-block">{errorMessage2}</div>

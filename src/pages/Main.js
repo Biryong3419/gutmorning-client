@@ -7,7 +7,7 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 const Main = () => {
     return (
       
-           <Router>
+           <Router basename={'/GutMorning'}>
              <MainStructure>
         <Switch>
         <Route path="/" exact={true} component={MainComponent}/>
