@@ -11,18 +11,20 @@ export class RegisterContainer extends Component {
     state = {
         confirmPassword: '',
         open: false ,
-        registerMessage : ''
+        registerMessage : '',
+        emailEntered: '',
+        isEmailValid: false,
     }
     openModal = this.openModal.bind(this);
     closeModal = this.closeModal.bind(this);
-    openModal() {
-        this.setState({ open: true });
+    openModal(message) {
+        this.setState({ open: true, registerMessage: message });
       }
     closeModal() {
         this.setState({ open: false });
     }
     componentDidMount() {
-        this.openModal();
+
         this.initialize();
     }
     
@@ -64,15 +66,11 @@ export class RegisterContainer extends Component {
         const { confirmPassword } = this.state;
         if (confirmPassword) {
             if (!this.doesPasswordMatch()) {
-                this.setState({registerMessage:'비밀번호가 일치하지 않습니다.'});
-                this.openModal();
-            return(
-              <div className="invalid-feedback d-block">패스워드가 일치하지 않습니다</div>
-            );
-          }else {
-            const { register } = this.props;
-            register();
-          }
+                this.openModal('비밀번호가 일치하지 않습니다.');
+            }else {
+                const { register } = this.props;
+                register();
+            }
         }else {
             console.log('');
             //등록 요청 실패 alert 띄우기
@@ -82,7 +80,8 @@ export class RegisterContainer extends Component {
       };
       
       doesPasswordMatch() {
-          const { password, confirmPassword } = this.state;
+          const { password } = this.props;
+          const { confirmPassword } = this.state;
           return password === confirmPassword;
       }
 
@@ -103,6 +102,7 @@ export class RegisterContainer extends Component {
         if (confirmPassword) {
             
             if (!this.doesPasswordMatch()) {
+             
             return(
               <div className="invalid-feedback d-block">패스워드가 일치하지 않습니다</div>
             );
@@ -122,10 +122,13 @@ export class RegisterContainer extends Component {
           onClose={this.closeModal}
         >
           <div className="modal1">
-            <a className="close1" onClick={this.closeModal}>
+          {this.state.registerMessage}
+          <div>
+            <button className="close1" onClick={this.closeModal}>
               &times;
-            </a>
-            {this.state.registerMessage}
+              닫기
+            </button>
+            </div>
           </div>
         </Popup>
           <RegisterForm
@@ -149,7 +152,6 @@ export class RegisterContainer extends Component {
 const mapStateToProps = state => ({
     username: state.auth.form.username,
     password: state.auth.form.password,
-    confirmPassword: '',
     userInfo: state.auth.userInfo,
     logged: state.auth.logged,
     error: state.auth.error

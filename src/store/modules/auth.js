@@ -288,7 +288,7 @@ export const auth = (state = initialState, action) => {
                         ...state,
                         error: {
                         triggered: true,
-                        message: "WRONG USERNAME OR PASSWORD"
+                        message: "이미 존재하는 이메일 주소 입니다."
                     }
                 };
             case 500:
@@ -329,7 +329,7 @@ export const auth = (state = initialState, action) => {
                         ...state,
                         error: {
                             triggered: true,
-                            message: "PLEASE TRY AGAIN"
+                            message: "아이디 또는 비밀번호가 일치하지 않습니다."
                         }
                     };
                 default:
