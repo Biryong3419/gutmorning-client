@@ -43,7 +43,8 @@ export class RegisterContainer extends Component {
                 JSON.stringify({
                     id: this.props.userInfo.id,
                     username: this.props.userInfo.username,
-                    token: this.props.userInfo.token
+                    token: this.props.userInfo.token,
+                    type: this.props.userInfo.type,
                 })
             );
             // 값을 저장 후, main페이지로 이동시켜준다.

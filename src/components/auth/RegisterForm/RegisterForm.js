@@ -181,6 +181,8 @@ const RegisterForm = ({
           로그인
         </Link>
           <a className="return" href="/">메인화면 돌아가기</a>
+      {/* 네이버아이디로로그인 버튼 노출 영역 */}
+      <div id="naver_id_login"></div>
     </div>
   );
 };

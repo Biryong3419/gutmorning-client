@@ -1,7 +1,8 @@
 import { ajax } from "rxjs/observable/dom/ajax";
-import { of } from "rxjs";
+import { of,empty } from "rxjs";
 import { map, mergeMap, catchError, withLatestFrom } from "rxjs/operators";
 import { ofType } from "redux-observable";
+import { ApiUrl, NaverConfigs } from 'config';
 
 const REGISTER = 'auth/REGISTER';
 const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
@@ -26,6 +27,23 @@ const LOGOUT = "auth/LOGOUT";
 const LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 const LOGOUT_FAILURE = 'auth/LOGOUT_FAILURE';
 
+const initialState = {
+    form: {
+      username: "",
+      password: "",
+    },
+    error: {
+      triggered: false,
+      message: ""
+    },
+    logged: false,
+    userInfo: {
+      id: null,
+      username: "",
+      token: null
+    }
+  };
+
 export const logout = () => (
     {
     type: LOGOUT
@@ -39,49 +57,14 @@ export const logoutFailure = () => ({
     type: LOGOUT_FAILURE
 });
 
-const logoutEpic = (action$, state$) => {
-    return action$.pipe(
-        ofType(LOGOUT),
-        withLatestFrom(state$),
-        mergeMap(([action, state])=> {
-            console.log('logout')
-            const token = localStorage.getItem('userInfo')
-                ? JSON.parse(localStorage.getItem('userInfo')).token
-                : null;
-            return ajax
-                .post(
-                    `/api/auth/logout/`,
-                    // post의 body를 비워놓는다.
-                    {},
-                    {
-                        'Content-Type': 'application/json',
-                        Authorization: `token ${token}`
-                    }
-                )
-                .pipe(
-                    map(response => {
-                        // success시 localStorage에서 userInfo 삭제.
-                        localStorage.removeItem('userInfo');
-                        return logoutSuccess();
-                    }),
-                    catchError(error => {
-                        of({
-                            type: LOGIN_FAILURE,
-                            payload: error,
-                            error: true
-                        });
-                    })
-                );
-        })
-    )
-}
+
 
 export const checkUser = () => ({
     type: CHECK_USER
 });
 
 export const checkUserSuccess = () => ({
-    type: CHECK_USER_SUCCESS
+    type: CHECK_USER_SUCCESS,
 });
 
 export const checkUserFailure = error => ({
@@ -99,34 +82,6 @@ export const setUserTemp = ({ id, username, token }) => ({
         token
     }
 });
-
-const checkUserEpic = (action$, state$) => {
-    return action$.pipe(
-        ofType(CHECK_USER),
-        withLatestFrom(state$),
-        mergeMap(([action, state]) => {
-            const token = localStorage.getItem('userInfo')
-            ? JSON.parse(localStorage.getItem('userInfo')).token
-            : null;
-            return ajax
-                .get(`/api/auth/user/`, {
-                    'Content-Type': 'application/json',
-                    Authorization: `token ${token}`
-                })
-                .pipe(
-                    map(response => {
-                        return checkUserSuccess();
-                    }),
-                    catchError(error =>
-                        of({
-                            type: CHECK_USER_FAILURE,
-                            payload: error,
-                            error: true
-                        }))
-                );
-        })
-    );
-};
 
 export const register = () => (
     {
@@ -171,13 +126,126 @@ export const initializeError = () => ({
     type: INITIALIZE_ERROR
 })
 
+const logoutEpic = (action$, state$) => {
+    return action$.pipe(
+        ofType(LOGOUT),
+        withLatestFrom(state$),
+        mergeMap(([action, state])=> {
+            console.log('logout')
+            let token = null;
+            let loginType = null;
+            if (localStorage.getItem('userInfo')) {
+                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                token = userInfo.token;
+                loginType = userInfo.type;
+            }   
+            if (token == null || loginType == 'naver'){
+                console.log('??');
+                   
+                    localStorage.removeItem('userInfo');
+                    return of(logoutSuccess());
+            }else {
+                return ajax
+                .post(
+                    ApiUrl+`/api/auth/logout/`,
+                    // post의 body를 비워놓는다.
+                    {},
+                    {
+                        'Content-Type': 'application/json',
+                        Authorization: `token ${token}`
+                    }
+                )
+                .pipe(
+                    map(response => {
+                        console.log('??')
+                        // success시 localStorage에서 userInfo 삭제.
+                        localStorage.removeItem('userInfo');
+                        return logoutSuccess();
+                    }),
+                    catchError(error => {
+                        of({
+                            type: LOGIN_FAILURE,
+                            payload: error,
+                            error: true
+                        });
+                    })
+                );
+            }
+        })
+    )
+}
+const checkUserEpic = (action$, state$) => {
+    console.log(action$)
+    return action$.pipe(
+        ofType(CHECK_USER),
+        withLatestFrom(state$),
+        mergeMap(([action, state]) => {
+            let userInfo = null;
+            if (localStorage.getItem('userInfo')) {
+                userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            }   
+            if(userInfo.token != null || userInfo.loginType == 'naver'){
+            //     const code=userInfo.token;
+
+            //    // console.log(NaverConfigs.NaverTokenUrl+`?grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}`)
+            //     return ajax
+            //     .post(ApiUrl+`/api/auth/naver/create`,  {'code':code, 'state':state}, { 'Content-Type': 'application/json' })
+            //         .pipe(
+            //             map(response => {
+            //                 console.log('hello');
+            //                 return checkUserSuccess();
+            //             }),
+            //             catchError(error => {
+            //                 console.log(error);
+            //                 return of(
+            //                 //     {
+            //                 //     type: CHECK_USER_FAILURE,
+            //                 //     payload: error,
+            //                 //     error: true
+            //                 // }
+            //                 )
+            //             }
+            //                 )
+            //         )
+                const timeGap = new Date(userInfo.createTime).getTime() - new Date().getTime()
+                if(timeGap<0) {
+                    return of(
+                        {
+                        type: CHECK_USER_FAILURE,
+                        error: true
+                    }
+                    )
+                }
+                return of();
+            }else {
+                return ajax
+                .get(ApiUrl+`/api/auth/user/`, {
+                    'Content-Type': 'application/json',
+                    Authorization: `token ${userInfo.token}`
+                })
+                .pipe(
+                    map(response => {
+                        return checkUserSuccess();
+                    }),
+                    catchError(error =>
+                        of({
+                            type: CHECK_USER_FAILURE,
+                            payload: error,
+                            error: true
+                        }))
+                );
+            }
+        })
+    );
+};
+
 const registerEpic = (action$, state$) => {
     return action$.pipe(
       ofType(REGISTER),
       withLatestFrom(state$),
       mergeMap(([action, state]) => {
         const { username, password } = state.auth.form;
-        return ajax.post(`/api/auth/register/`, { username, password }).pipe(
+        return ajax.post(ApiUrl+`/api/auth/register/`, { username, password }).pipe(
           map(response => {
             const { user, token } = response.response;
             return registerSuccess({ user, token });
@@ -200,7 +268,7 @@ const loginEpic = (action$, state$) => {
       withLatestFrom(state$),
       mergeMap(([action, state]) => {
         const { username, password } = state.auth.form;
-        return ajax.post('/api/auth/login/', { username, password }).pipe(
+        return ajax.post(ApiUrl+'/api/auth/login/', { username, password }).pipe(
           map(response => {
             const { user, token } = response.response;
             return loginSuccess({ user, token });
@@ -229,22 +297,7 @@ export const changeInput= ({name, value}) => ({
     }
 });
 
-const initialState = {
-    form: {
-      username: "",
-      password: "",
-    },
-    error: {
-      triggered: false,
-      message: ""
-    },
-    logged: false,
-    userInfo: {
-      id: null,
-      username: "",
-      token: null
-    }
-  };
+
 
 export const auth = (state = initialState, action) => {
     switch (action.type) {
@@ -332,6 +385,14 @@ export const auth = (state = initialState, action) => {
                             message: "아이디 또는 비밀번호가 일치하지 않습니다."
                         }
                     };
+                case 401:
+                    return {
+                            ...state,
+                            error: {
+                                triggered: true,
+                                message: "Response is 401"
+                            }
+                        };
                 default:
                     return {
                         ...state
@@ -340,7 +401,7 @@ export const auth = (state = initialState, action) => {
         
         case CHECK_USER_SUCCESS:
             return {
-                ...state
+                ...state,
             };
         case CHECK_USER_FAILURE:
             return {

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./AuthForm.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import { NaverConfigs } from 'config';
 
 //css
 import './main.css';
@@ -79,9 +80,17 @@ const AuthForm = ({
           handleLogin();
     }
   };
-
   let title='로그인'
-
+  const loginToNaverID = () => {
+    // var client_id = 'WjfwfaKdlTu60tbS6tTL'
+    // var redirectURI = encodeURI(NaverConfigs.NaverCallbackUrl)
+    const url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NaverConfigs.NaverClientId}&redirect_uri=${NaverConfigs.NaverCallbackUrl}&state=${NaverConfigs.NaverState}`
+    window.open(url)
+    
+    // axios.get(url).then(response =>{
+    //   window.open("",response.data.view)
+    // });
+  }
   return (
 <main>
     <div className = 'before'>
@@ -120,7 +129,8 @@ const AuthForm = ({
         <Link to={`/auth/register`} className={cx("description")}>
           회원가입
         </Link>
-     
+        <div><input type='button' onClick={loginToNaverID} value='네이버 아이디로 로그인'/></div>
+        {/* <NaverLogin/> */}
           <a className="return" href="/">메인화면 돌아가기</a>
     </div>
     </div>
@@ -205,5 +215,27 @@ const AuthForm = ({
     </main>
   );
 };
+
+
+
+// class NaverLogin extends React.Component {
+
+//   componentDidMount() {
+//     var naver_id_login = new window.naver_id_login(client_id, redirectURI)
+//     var state = naver_id_login.getUniqState()
+//     console.log(state)
+//   	naver_id_login.setButton("white", 2,40)
+//   	naver_id_login.setDomain("http://localhost:3000")
+//   	naver_id_login.setState(state)
+//   	naver_id_login.init_naver_id_login()
+//   }
+
+//   render() {
+//     return <div id="naver_id_login"></div>
+//   }
+
+// }
+
+
 
 export default AuthForm;

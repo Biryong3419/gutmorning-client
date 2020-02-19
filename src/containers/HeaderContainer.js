@@ -21,7 +21,7 @@ export class HeaderContainer extends Component {
        
     };
     render() {
-      
+       
         const { handleLoginOut } = this;
         const { logged } = this.props;
         let loginStatus = "로그인";
