@@ -8,13 +8,11 @@ export class AuthContainer extends Component {
   componentDidMount() {
     this.initialize();
   }
-
   componentDidUpdate(prevProps, prevState) {
     // 하단에 AuthContainer를 withRouter로 감쌌기 때문에, history를 props로 이용할 수 있다.
     const { history } = this.props;
-
     if (prevProps.kind !== this.props.kind) {
-      this.initialize();
+    this.initialize();
     }
 
     if (prevProps.logged !== this.props.logged && this.props.logged) {
@@ -24,7 +22,8 @@ export class AuthContainer extends Component {
             JSON.stringify({
                 id: this.props.userInfo.id,
                 username: this.props.userInfo.username,
-                token: this.props.userInfo.token
+                token: this.props.userInfo.token,
+                type: this.props.userInfo.type,
             })
         );
         // 값을 저장 후, main페이지로 이동시켜준다.
@@ -56,7 +55,8 @@ export class AuthContainer extends Component {
     const { username, password, error } = this.props;
     const { handleChangeInput, handleLogin, handleRegister } = this;
     return (
-      <AuthForm
+      <main>
+        <AuthForm
         username={username}
         password={password}
         onChangeInput={handleChangeInput}
@@ -64,6 +64,9 @@ export class AuthContainer extends Component {
         onRegister={handleRegister}
         error={error}
       />
+        <div id="naver_id_login"></div>
+      </main>
+      
     );
   }
 }

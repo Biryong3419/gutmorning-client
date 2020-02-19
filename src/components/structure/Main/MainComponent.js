@@ -26,11 +26,9 @@ import 'lib/modal-video/css/modal-video.min.css'
 import 'assets/css/responsive.css'
 
 
-
 class Main extends Component {
-    componentDidMount(){
-      
 
+    componentDidMount(){
       window.$ = window.jQuery = jquery;
       require('hoverintent')
       require('superfish');

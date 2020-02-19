@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "amd-loader": "0.0.8",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "classnames": "^2.2.6",
     "hoverintent": "^2.2.1",
@@ -61,6 +62,5 @@
     ]
   },
   "devDependencies": {},
-  "proxy": "http://112.220.73.98:8088",
-  "homepage":"http://lims.accugenelab.co.kr/GutMorning"
+  "homepage": "http://lims.accugenelab.co.kr/GutMorning"
 }
