@@ -4,6 +4,15 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { NaverConfigs } from 'config';
 
+//css
+import './main.css';
+import './util.css';
+
+
+import 'fonts/iconic/css/material-design-iconic-font.min.css'
+
+
+
 const cx = classNames.bind(styles);
 
 const inputClassNameHelper = boolean => {
@@ -83,6 +92,8 @@ const AuthForm = ({
     // });
   }
   return (
+<main>
+    <div className = 'before'>
     <div className={cx("auth-form")}>
       <div className={cx("auth-title")}>GutMorning</div>
     
@@ -122,6 +133,86 @@ const AuthForm = ({
         {/* <NaverLogin/> */}
           <a className="return" href="/">메인화면 돌아가기</a>
     </div>
+    </div>
+
+
+
+
+
+    
+<div className="new">
+ 
+
+<div className="limiter">
+		<div className="container-login100">
+			<div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form className="login100-form validate-form">
+					<span className="login100-form-title p-b-49">
+						Login
+					</span>
+
+					<div className="wrap-input100 validate-input m-b-23 text-left" data-validate = "이메일을 입력해주세요.">
+						<span className="label-input100">이메일</span>
+						<input className="input100" type="text" name="username" placeholder=""/>
+						<span className="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+
+					<div className="wrap-input100 validate-input text-left" data-validate="비밀번호를 입력해주세요.">
+						<span className="label-input100">비밀번호</span>
+						<input className="input100" type="password" name="pass" placeholder=""/>
+						<span className="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+					
+					<div className="text-right p-t-8 p-b-31">
+						<a href="#">
+							비밀번호 찾기
+						</a>
+						<a href="#" classNameName="txt2">
+							&nbsp; <b>회원가입</b>
+						</a>
+					</div>
+					
+					<div className="container-login100-form-btn">
+						<div className="wrap-login100-form-btn">
+							<div className="login100-form-bgbtn"></div>
+							<button className="login100-form-btn">
+								Login
+							</button>
+						</div>
+					</div>
+
+					<div className="txt1 text-center p-b-17 p-t-54">
+						<span>
+							또는
+						</span>
+					</div>
+
+					<div className="flex-c-m">
+
+						<a href="#">
+							<button><img className="login100-form-btn" src={require('assets/img/NAVER.svg')} alt="Naver"/>
+							</button>
+						</a>
+					</div>
+
+					<div className="flex-col-c p-t-55">
+						<a href="#" className="txt2">
+							첫화면으로 돌아가기
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+</div>
+
+    </main>
   );
 };
 
