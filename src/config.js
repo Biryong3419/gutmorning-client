@@ -1,8 +1,15 @@
+const arr = window.location.href.split("/");
+const current_ip = arr[0] + "//" + arr[2]
+
+//production 반영할때 basename 체크
 //const Basename = '/GutMorning';
 const Basename = '';
-//  //  "proxy": "http://112.220.73.98:8088",
+//  "homepage": "http://lims.accugenelab.co.kr/GutMorning"
+//  "proxy": "http://112.220.73.98:8088",
 const ApiUrl = 'http://112.220.73.98:8900'
-const NaverCallbackUrl = 'http://112.220.73.98:8900/api/auth/naver/create'
+//const NaverCallbackUrl = 'http://112.220.73.98:8900/api/auth/naver/create'
+
+const NaverCallbackUrl = current_ip+'/auth/naver/callback';
 const NaverTokenUrl = 'https://nid.naver.com/oauth2.0/token';
 const NaverClientSecret = 'uZ4eyazqsJ';
 const NaverClientId = 'WjfwfaKdlTu60tbS6tTL';

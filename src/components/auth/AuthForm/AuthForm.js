@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import history from 'helpers/history';
+import React, {useState} from "react";
 import styles from "./AuthForm.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -86,14 +87,14 @@ const AuthForm = ({
     // var redirectURI = encodeURI(NaverConfigs.NaverCallbackUrl)
     const url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NaverConfigs.NaverClientId}&redirect_uri=${NaverConfigs.NaverCallbackUrl}&state=${NaverConfigs.NaverState}`
     window.open(url)
-    
+    history.push('/')
     // axios.get(url).then(response =>{
     //   window.open("",response.data.view)
     // });
   }
   return (
 <main>
-    <div className = 'before'>
+    {/* <div className = 'before'>
     <div className={cx("auth-form")}>
       <div className={cx("auth-title")}>GutMorning</div>
     
@@ -130,10 +131,9 @@ const AuthForm = ({
           회원가입
         </Link>
         <div><input type='button' onClick={loginToNaverID} value='네이버 아이디로 로그인'/></div>
-        {/* <NaverLogin/> */}
           <a className="return" href="/">메인화면 돌아가기</a>
     </div>
-    </div>
+    </div> */}
 
 
 
@@ -153,13 +153,25 @@ const AuthForm = ({
 
 					<div className="wrap-input100 validate-input m-b-23 text-left" data-validate = "이메일을 입력해주세요.">
 						<span className="label-input100">이메일</span>
-						<input className="input100" type="text" name="username" placeholder=""/>
+						<input className="input100" 
+                   type="text"
+                   name="username"
+                   value={username}
+                   onChange={handleChange}
+                   onKeyPress={handleKeyPress}
+            />
 						<span className="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div className="wrap-input100 validate-input text-left" data-validate="비밀번호를 입력해주세요.">
 						<span className="label-input100">비밀번호</span>
-						<input className="input100" type="password" name="pass" placeholder=""/>
+						<input className="input100"
+             type="password"
+             name="password"
+             value={password}
+             onChange={handleChange}
+             onKeyPress={handleKeyPress}
+            />
 						<span className="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
@@ -167,20 +179,22 @@ const AuthForm = ({
 						<a href="#">
 							비밀번호 찾기
 						</a>
-						<a href="#" classNameName="txt2">
-							&nbsp; <b>회원가입</b>
+						<a href="#" className="txt2">
+							&nbsp; <b><Link to={`/auth/register`} className={cx("description")}>
+          회원가입
+        </Link></b>
 						</a>
 					</div>
 					
 					<div className="container-login100-form-btn">
 						<div className="wrap-login100-form-btn">
 							<div className="login100-form-bgbtn"></div>
-							<button className="login100-form-btn">
+							<div className="login100-form-btn" onClick={handleLogin}>
 								Login
-							</button>
+							</div>
 						</div>
 					</div>
-
+          {renderFeedbackMessage()}
 					<div className="txt1 text-center p-b-17 p-t-54">
 						<span>
 							또는
@@ -190,13 +204,13 @@ const AuthForm = ({
 					<div className="flex-c-m">
 
 						<a href="#">
-							<button><img className="login100-form-btn" src={require('assets/img/NAVER.svg')} alt="Naver"/>
+							<button><img className="login100-form-btn" onClick={loginToNaverID} src={require('assets/img/NAVER.svg')} alt="Naver"/>
 							</button>
 						</a>
 					</div>
 
 					<div className="flex-col-c p-t-55">
-						<a href="#" className="txt2">
+						<a href="/" className="txt2">
 							첫화면으로 돌아가기
 						</a>
 					</div>

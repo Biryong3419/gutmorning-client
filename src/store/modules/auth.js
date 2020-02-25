@@ -133,13 +133,13 @@ const logoutEpic = (action$, state$) => {
         mergeMap(([action, state])=> {
             console.log('logout')
             let token = null;
-            let loginType = null;
+            let type = null;
             if (localStorage.getItem('userInfo')) {
                 const userInfo = JSON.parse(localStorage.getItem('userInfo'));
                 token = userInfo.token;
-                loginType = userInfo.type;
+                type = userInfo.type;
             }   
-            if (token == null || loginType == 'naver'){
+            if (token == null || type == 'naver'){
                 console.log('??');
                    
                     localStorage.removeItem('userInfo');
@@ -174,6 +174,7 @@ const logoutEpic = (action$, state$) => {
         })
     )
 }
+
 const checkUserEpic = (action$, state$) => {
     console.log(action$)
     return action$.pipe(

@@ -1,58 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import * as authActions from '../store/modules/auth';
 import { withRouter } from 'react-router-dom';
-import { NaverConfigs, ApiUrl } from 'config';
-
-var client_id = 'WjfwfaKdlTu60tbS6tTL'
-var redirectURI = encodeURI(NaverConfigs.NaverCallbackUrl)
 
 export class BaseContainer extends Component {
-
     state = {
         nickname: ''
     }
-
     constructor(props) {
         super(props)
-        window.naverSignInCallback = this.naverSignInCallback.bind(this)
     }
-
-    naverSignInCallback =() => {
-        console.log('navercallback')
-        var naver_id_login = new window.naver_id_login(client_id, redirectURI)
-        //첫 로그인
-        if(!localStorage.getItem('userInfo')){
-            let date = new Date();
-            date.setMinutes(date.getMinutes()+60)
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                    id: naver_id_login.getProfileData('email'),
-                    username: naver_id_login.getProfileData('id'),
-                    token: naver_id_login.oauthParams.access_token,
-                    createTime: date,
-                    type: 'naver'
-                })
-            );
-        }
-        //기존 정보 있을 경우
-        else if(localStorage.getItem('userInfo') && JSON.parse(localStorage.getItem('userInfo')).token != naver_id_login.oauthParams.access_token){
-            let date = new Date();
-            date.setMinutes(date.getMinutes + 60);
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                    id: naver_id_login.getProfileData('email'),
-                    username: naver_id_login.getProfileData('id'),
-                    token: naver_id_login.oauthParams.access_token,
-                    createTime: date,
-                    type: 'naver'
-                })
-            );
-        }
-    }  
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.logged !== this.props.logged && !this.props.logged) {
@@ -65,12 +22,7 @@ export class BaseContainer extends Component {
     }
 
     componentDidMount() {
-        var naver_id_login = new window.naver_id_login(client_id, redirectURI)
-        if(naver_id_login.oauthParams.access_token){
-            //naver_id_login.get_naver_userprofile("")
-            this.naverSignInCallback()
-        }
-        this.checkUser();
+            this.checkUser();
     }
 
     checkUser() {
@@ -123,7 +75,10 @@ const mapDispatchToProps = dispatch => {
         },
         setUserTemp: ({ id, username }) => {
             dispatch(authActions.setUserTemp({ id, username }));
-        }
+        },
+        login: () => {
+            dispatch(authActions.login());
+          }
     };
 };
 

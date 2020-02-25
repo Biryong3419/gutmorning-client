@@ -52,6 +52,11 @@ export class AuthContainer extends Component {
     register();
   };
   render() {
+    const { logged } = this.props;
+    //로그인 상태일 경우 뒤로 돌아가기
+    if (logged) {
+        this.props.history.goBack();
+    }
     const { username, password, error } = this.props;
     const { handleChangeInput, handleLogin, handleRegister } = this;
     return (
