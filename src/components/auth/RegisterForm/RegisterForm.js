@@ -3,6 +3,10 @@ import styles from "./RegisterForm.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 
+//css
+import '../main.css';
+import '../util.css';
+
 const cx = classNames.bind(styles);
 
 const inputClassNameHelper = boolean => {
@@ -15,7 +19,6 @@ const inputClassNameHelper = boolean => {
       return '';
   }
 };
-
 
 const RegisterForm = ({
   onChangeInput,
@@ -47,7 +50,7 @@ const RegisterForm = ({
   const renderPasswordFeedbackMessage = () => {
     if (!isPasswordValid && passwordEntered.length>0) {
         return(
-          <div className="invalid-feedback d-block">영문,숫자,특수문자를 혼합하여 8자리~20자리 이내 비밀번호를 입력하세요.</div>
+          <div className="invalid-feedback d-block">영문,숫자,특수문자를 혼합하여 8자리~20자리 이내 비밀번호</div>
         );
     }
   }
@@ -123,9 +126,9 @@ const RegisterForm = ({
     onConfirmPassword({ value });
   };
 
-
   return (
-    <div className={cx("auth-form")}>
+  <main>
+    {/* <div className={cx("auth-form")}>
       <div className={cx("auth-title")}>이메일로 가입하기</div>
   
       <div className={cx("line-wrapper")}>
@@ -181,9 +184,119 @@ const RegisterForm = ({
           로그인
         </Link>
           <a className="return" href="/">메인화면 돌아가기</a>
-      {/* 네이버아이디로로그인 버튼 노출 영역 */}
       <div id="naver_id_login"></div>
-    </div>
+    </div> */}
+
+    <div className="new">
+ 
+
+<div className="limiter">
+		<div className="container-login100">
+			<div className="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+				<form className="login100-form validate-form">
+					<span className="login100-form-title p-b-49">
+						Sign up
+					</span>
+
+					<div className="wrap-input100 validate-input text-left" data-validate = "이메일을 입력해주세요.">
+						<span className="label-input100">이메일</span>
+            <input
+          className={`input100 ${inputClassNameHelper(isEnteredEmailValid())}`}
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+        />
+						<span className="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+          {renderEmailFeedbackMessage()}
+          {'　'}
+					<div className="wrap-input100 validate-input text-left" data-validate="비밀번호를 입력해주세요.">
+						<span className="label-input100">비밀번호</span>
+            <input
+          className={`input100 ${inputClassNameHelper(isEnteredPasswordValid())}`}
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress}
+        />
+						<span className="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+          {renderPasswordFeedbackMessage()}
+         {'　'}
+          <div className="wrap-input100 validate-input text-left" data-validate="비밀번호를 입력해주세요.">
+						<span className="label-input100">비밀번호 확인</span>
+            <input
+          className={`input100 ${confirmPasswordClassName}`}
+          type="password"
+          name="password2"
+          value={confirmPassword}
+          onChange={handleOnConfirmPassword}
+          onKeyPress={handleKeyPress}
+        />
+						<span className="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+          {renderFeedbackMessage}
+					
+					<div className="text-right p-t-8 p-b-31">
+						{/* <a href="#">
+							비밀번호 찾기
+						</a> */}
+						<a href="#" className="txt2">
+							&nbsp; <b><Link to={`/auth/login`} className={cx("description")}>
+          로그인
+        </Link></b>
+						</a>
+					</div>
+          <div className={cx("error")}>
+        {error.triggered && (
+          <div className={cx("message")}>{error.message}</div>
+        )}
+      </div>
+      <div className={cx("error")}>
+          <div className={cx("message")}>{errorMessage2}</div>
+        
+      </div>
+					<div className="container-login100-form-btn">
+						<div className="wrap-login100-form-btn">
+							<div className="login100-form-bgbtn"></div>
+              <div className="login100-form-btn" 
+                onClick={handleRegister}
+              >
+								SIGN UP
+							</div>
+						</div>
+					</div>
+          {/* {renderFeedbackMessage()} */}
+					{/* <div className="txt1 text-center p-b-17 p-t-54">
+						<span>
+							또는
+						</span>
+					</div>
+
+					<div className="flex-c-m">
+
+						<a href="#">
+							<button>
+                <img className="login100-form-btn" onClick={loginToNaverID} src={require('assets/img/NAVER.svg')} alt="Naver"/>
+							</button>
+						</a>
+					</div> */}
+
+					<div className="flex-col-c p-t-55">
+						<a href="/" className="txt2">
+							첫화면으로 돌아가기
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+  </main>
   );
 };
 

@@ -6,13 +6,8 @@ import { Link } from "react-router-dom";
 import { NaverConfigs } from 'config';
 
 //css
-import './main.css';
-import './util.css';
-
-
-import 'fonts/iconic/css/material-design-iconic-font.min.css'
-
-
+import '../main.css';
+import '../util.css';
 
 const cx = classNames.bind(styles);
 
@@ -218,12 +213,6 @@ const AuthForm = ({
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
 </div>
 
     </main>

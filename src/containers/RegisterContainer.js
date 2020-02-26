@@ -35,20 +35,19 @@ export class RegisterContainer extends Component {
         if (prevProps.kind !== this.props.kind) {
           this.initialize();
         }
-    
-        if (prevProps.logged !== this.props.logged && this.props.logged) {
+        if (prevProps.registered !== this.props.registered && this.props.registered) {
             //logged가 true가 되면 localStorage에 값을 저장합니다.
-            localStorage.setItem(
-                "userInfo",
-                JSON.stringify({
-                    id: this.props.userInfo.id,
-                    username: this.props.userInfo.username,
-                    token: this.props.userInfo.token,
-                    type: this.props.userInfo.type,
-                })
-            );
-            // 값을 저장 후, main페이지로 이동시켜준다.
-            history.push("/");
+            // localStorage.setItem(
+            //     "userInfo",
+            //     JSON.stringify({
+            //         id: this.props.userInfo.id,
+            //         username: this.props.userInfo.username,
+            //         token: this.props.userInfo.token,
+            //         type: this.props.userInfo.type,
+            //     })
+            // );
+            // 값을 저장 후, 메일 확인 안내 문구 페이지로 이동시켜준다.
+            history.push("/auth/email/confirm");
         }
       }
 
@@ -151,6 +150,7 @@ export class RegisterContainer extends Component {
 
 
 const mapStateToProps = state => ({
+    registered: state.auth.registered,
     username: state.auth.form.username,
     password: state.auth.form.password,
     userInfo: state.auth.userInfo,

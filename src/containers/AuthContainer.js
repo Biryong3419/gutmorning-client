@@ -4,6 +4,8 @@ import AuthForm from "components/auth/AuthForm";
 import { withRouter } from "react-router-dom";
 import * as authActions from "store/modules/auth";
 
+import 'fonts/iconic/css/material-design-iconic-font.min.css'
+
 export class AuthContainer extends Component {
   componentDidMount() {
     this.initialize();

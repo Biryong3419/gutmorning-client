@@ -36,6 +36,7 @@ const initialState = {
       triggered: false,
       message: ""
     },
+    registered: false,
     logged: false,
     userInfo: {
       id: null,
@@ -95,6 +96,12 @@ export const registerSuccess = ({ user, token }) => ({
         token
     }
 });
+export const registerSuccess2 = ({registered}) => ({
+    type: REGISTER_SUCCESS,
+    payload: {
+        registered
+    }
+});
 
 export const registerFailure = error => ({
     type: REGISTER_FAILURE,
@@ -131,7 +138,6 @@ const logoutEpic = (action$, state$) => {
         ofType(LOGOUT),
         withLatestFrom(state$),
         mergeMap(([action, state])=> {
-            console.log('logout')
             let token = null;
             let type = null;
             if (localStorage.getItem('userInfo')) {
@@ -140,7 +146,6 @@ const logoutEpic = (action$, state$) => {
                 type = userInfo.type;
             }   
             if (token == null || type == 'naver'){
-                console.log('??');
                    
                     localStorage.removeItem('userInfo');
                     return of(logoutSuccess());
@@ -157,7 +162,6 @@ const logoutEpic = (action$, state$) => {
                 )
                 .pipe(
                     map(response => {
-                        console.log('??')
                         // success시 localStorage에서 userInfo 삭제.
                         localStorage.removeItem('userInfo');
                         return logoutSuccess();
@@ -248,8 +252,9 @@ const registerEpic = (action$, state$) => {
         const { username, password } = state.auth.form;
         return ajax.post(ApiUrl+`/api/auth/register/`, { username, password }).pipe(
           map(response => {
-            const { user, token } = response.response;
-            return registerSuccess({ user, token });
+            //const { user, token } = response.response;
+            const registered = true;
+            return registerSuccess2({registered});
           }),
           catchError(error =>
             of({
@@ -328,12 +333,13 @@ export const auth = (state = initialState, action) => {
         case REGISTER_SUCCESS:
             return {
                 ...state,
-                logged: true,
-                userInfo: {
-                    id: action.payload.user.id,
-                    username: action.payload.user.username,
-                    token: action.payload.token
-            }
+                registered: action.payload.registered,
+                // logged: true,
+            //     userInfo: {
+            //         id: action.payload.user.id,
+            //         username: action.payload.user.username,
+            //         token: action.payload.token
+            // }
         };
         case REGISTER_FAILURE:
             switch (action.payload.status) {
