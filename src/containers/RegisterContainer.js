@@ -47,7 +47,12 @@ export class RegisterContainer extends Component {
             //     })
             // );
             // 값을 저장 후, 메일 확인 안내 문구 페이지로 이동시켜준다.
-            history.push("/auth/email/confirm");
+            history.push({
+              pathname: "/auth/confirm/email",
+              state: { username : this.props.userInfo.username,
+                        id : this.props.userInfo.id
+              }
+            });
         }
       }
 

@@ -3,6 +3,7 @@ import MainStructure from 'components/structure/MainStructure';
 import MainComponent from 'components/structure/Main';
 import NaverCallback from 'components/naver/NaverCallback.js'
 import EmailConfirm from 'components/auth/confirm/EmailConfirm'
+import ConfirmResult from 'components/auth/confirm/ConfirmResult'
 import { Register, Auth, NotFound, Kit} from 'pages/';
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { Basename } from 'config';
@@ -17,6 +18,7 @@ const Main = () => {
             <Route path='/auth/login' exact={true} component={Auth} />
             <Route path='/auth/register' exact={true} component={Register} />
             <Route path='/auth/confirm/email' exact={true} component={EmailConfirm} />
+            <Route path='/auth/confirm/result' exact={true} component={ConfirmResult} />
             <Route component={NotFound} />
             </Switch>
         </MainStructure>

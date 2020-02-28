@@ -21,7 +21,6 @@ export class HeaderContainer extends Component {
        
     };
     render() {
-       
         const { handleLoginOut } = this;
         const { logged } = this.props;
         let loginStatus = "로그인";
@@ -31,8 +30,6 @@ export class HeaderContainer extends Component {
         }else {
             loginStatus = "로그인";
         }
-        
-        
 
         return <Header onLoginOut={handleLoginOut} loginStatus={loginStatus}/>;
     }

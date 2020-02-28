@@ -72,10 +72,13 @@ const AuthForm = ({
     onLogin();
   }
   const handleKeyPress = e => {
+
     if (e.key === "Enter") {
           handleLogin();
+          e.preventDefault()
     }
   };
+
   let title='로그인'
   const loginToNaverID = () => {
     // var client_id = 'WjfwfaKdlTu60tbS6tTL'
@@ -130,13 +133,8 @@ const AuthForm = ({
     </div>
     </div> */}
 
-
-
-
-
     
 <div className="new">
- 
 
 <div className="limiter">
 		<div className="container-login100">
@@ -189,6 +187,11 @@ const AuthForm = ({
 							</div>
 						</div>
 					</div>
+          <div className={cx("error")}>
+        {error.triggered && (
+          <div className={cx("message")}>{error.message}</div>
+        )}
+      </div>
           {renderFeedbackMessage()}
 					<div className="txt1 text-center p-b-17 p-t-54">
 						<span>
@@ -198,10 +201,8 @@ const AuthForm = ({
 
 					<div className="flex-c-m">
 
-						<a href="#">
 							<button><img className="login100-form-btn" onClick={loginToNaverID} src={require('assets/img/NAVER.svg')} alt="Naver"/>
 							</button>
-						</a>
 					</div>
 
 					<div className="flex-col-c p-t-55">

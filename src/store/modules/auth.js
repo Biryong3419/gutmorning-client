@@ -38,6 +38,7 @@ const initialState = {
     },
     registered: false,
     logged: false,
+    statusCode: 0,
     userInfo: {
       id: null,
       username: "",
@@ -96,10 +97,11 @@ export const registerSuccess = ({ user, token }) => ({
         token
     }
 });
-export const registerSuccess2 = ({registered}) => ({
+export const registerSuccess2 = ({registered, user}) => ({
     type: REGISTER_SUCCESS,
     payload: {
-        registered
+        registered,
+        user,
     }
 });
 
@@ -252,9 +254,10 @@ const registerEpic = (action$, state$) => {
         const { username, password } = state.auth.form;
         return ajax.post(ApiUrl+`/api/auth/register/`, { username, password }).pipe(
           map(response => {
-            //const { user, token } = response.response;
+            // const { user, token } = response.response;
+            const { user } = response.response;
             const registered = true;
-            return registerSuccess2({registered});
+            return registerSuccess2({registered, user});
           }),
           catchError(error =>
             of({
@@ -279,12 +282,13 @@ const loginEpic = (action$, state$) => {
             const { user, token } = response.response;
             return loginSuccess({ user, token });
           }),
-          catchError(error =>
-            of({
-              type: LOGIN_FAILURE,
-              payload: error,
-              error: true
-            })
+          catchError(error => {
+            return   of({
+                type: LOGIN_FAILURE,
+                payload: error,
+                error: true
+              })
+          }
           )
         );
       })
@@ -331,15 +335,17 @@ export const auth = (state = initialState, action) => {
             }
         };
         case REGISTER_SUCCESS:
+            console.log('register successed')
             return {
                 ...state,
+                statusCode: 0,
                 registered: action.payload.registered,
-                // logged: true,
-            //     userInfo: {
-            //         id: action.payload.user.id,
-            //         username: action.payload.user.username,
-            //         token: action.payload.token
-            // }
+               // logged: true,
+                userInfo: {
+                    id: action.payload.user.id,
+                    username: action.payload.user.username,
+                   // token: action.payload.token
+            }
         };
         case REGISTER_FAILURE:
             switch (action.payload.status) {
@@ -377,9 +383,10 @@ export const auth = (state = initialState, action) => {
         case LOGIN_FAILURE:
             switch (action.payload.status) {
                 case 400:
+                    console.log('login failure!')
                     return {
                         ...state,
-                        error: {
+                            error: {
                             triggered: true,
                             message: "WRONG USERNAME OR PASSWORD"
                         }
@@ -400,6 +407,16 @@ export const auth = (state = initialState, action) => {
                                 message: "Response is 401"
                             }
                         };
+                case 406:
+                    return {
+                        ...state,
+                        statusCode: 406,
+                        userInfo: action.payload.response.user,
+                        error: {
+                            triggered: true,
+                            message: "Email verification is required"
+                            }
+                        };        
                 default:
                     return {
                         ...state

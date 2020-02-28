@@ -31,6 +31,28 @@ export class AuthContainer extends Component {
         // 값을 저장 후, main페이지로 이동시켜준다.
         history.push("/");
     }
+
+    if (prevProps.statusCode !== this.props.statusCode && this.props.statusCode == 406) {
+      //logged가 true가 되면 localStorage에 값을 저장합니다.
+      // localStorage.setItem(
+      //     "userInfo",
+      //     JSON.stringify({
+      //         id: this.props.userInfo.id,
+      //         username: this.props.userInfo.username,
+      //         token: this.props.userInfo.token,
+      //         type: this.props.userInfo.type,
+      //     })
+      // );
+      // 값을 저장 후, main페이지로 이동시켜준다.
+      history.push({
+        pathname: "/auth/confirm/email",
+        state: { username : this.props.userInfo.username,
+                  id : this.props.userInfo.id
+        }
+      });
+  }
+
+  
   }
 
   initialize = () => {
@@ -83,6 +105,7 @@ const mapStateToProps = state => ({
   password: state.auth.form.password,
   userInfo: state.auth.userInfo,
   logged: state.auth.logged,
+  statusCode : state.auth.statusCode,
   error: state.auth.error
 });
 
