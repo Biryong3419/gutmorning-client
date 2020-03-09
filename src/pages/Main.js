@@ -15,9 +15,8 @@ import { Basename } from 'config';
 const Main = () => {
     return (
       <Router basename={Basename}>
-            <MainStructure>
-            <Switch>
-          
+        <MainStructure>
+          <Switch>
             <Route path='/auth/naver/callback' exact={true} component={NaverCallback} />
             <Route path="/" exact={true} component={MainComponent}/>
             <Route path="/kit" exact={true} component={Kit}/>
@@ -31,10 +30,8 @@ const Main = () => {
             <Route path='/user/pp' exact={true} component={PrivacyPolicy} />
             <Route path='/user/tou' exact={true} component={TermOfUse} />
             <Route component={NotFound} />
-      
-            </Switch>
-              </MainStructure>
-  
+          </Switch>
+        </MainStructure>
       </Router>
       
     );

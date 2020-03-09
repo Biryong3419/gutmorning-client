@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import styles from "./RegisterForm.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 //css
 import '../main.css';
@@ -38,6 +40,9 @@ const RegisterForm = ({
   const [passwordEntered, setPasswordEntered] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [errorMessage2, setErrorMessage2] = useState('');
+  const [ppAgree, setPpAgree] = useState(false);
+  const [touAgree, setTouAgree] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const renderEmailFeedbackMessage = () => {
     if (!isEmailValid && emailEntered.length>0) {
@@ -95,6 +100,20 @@ const RegisterForm = ({
      }, 3000)
       return;
     }
+    if(!ppAgree) {
+      setErrorMessage2('개인 정보 처리방침 동의여부를 확인해 주세요.');
+      setTimeout(()=> {
+        setErrorMessage2('');
+     }, 3000)
+      return;
+    }
+    if(!touAgree) {
+      setErrorMessage2('이용약관 동의여부를 확인해 주세요.');
+      setTimeout(()=> {
+        setErrorMessage2('');
+     }, 3000)
+      return;
+    }
     onRegister();
   }
   useEffect(() => {
@@ -102,7 +121,9 @@ const RegisterForm = ({
     validatePassword(passwordEntered);
   });
   const handleChange = e => {
-    const { name, value } = e.target;
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
     onChangeInput({ name, value });
 
     // Email format check
@@ -113,6 +134,14 @@ const RegisterForm = ({
      // Password format check
      if(name=='password') {
       setPasswordEntered(value);
+    }
+
+    if(name=='touAgree') {
+      setTouAgree(value);
+    }
+
+    if(name=='ppAgree') {
+      setPpAgree(value);
     }
   };
 
@@ -125,6 +154,11 @@ const RegisterForm = ({
     const { value } = e.target;
     onConfirmPassword({ value });
   };
+  const w = 800
+  const h = 600
+  var top = window.outerHeight / 2 + window.screenY - ( h / 2)
+  var left = window.outerWidth / 2 + window.screenX - ( w / 2)
+  const windowOpenOptions = 'width=800 height=600 left='+left +' top='+top;
 
   return (
   <main>
@@ -240,15 +274,37 @@ const RegisterForm = ({
 					</div>
           {renderFeedbackMessage}
 					
-					<div className="text-right p-t-8 p-b-31">
+					<div className="text-right p-t-8">
+            <div>개인정보 처리방침 동의 (필수){' '}
+              <input 
+                name='ppAgree'
+                type="checkbox"
+                checked={ppAgree}
+                onChange={handleChange}
+              />
+              {'　'}<span className='underline cursor-pointer' onClick={()=>
+                window.open('/simple/pp', '', windowOpenOptions)
+              }>자세히 보기</span>
+            </div>
+            <div className='p-b-12'>이용약관 동의 (필수){' '}
+              <input
+                type="checkbox"
+                name="touAgree"
+                checked={touAgree}
+                onChange={handleChange}  
+              />
+              {'　'}<span className='underline cursor-pointer' onClick={()=>
+                window.open('/simple/tou' , '', windowOpenOptions)
+              }>자세히 보기</span>
+            </div>
 						{/* <a href="#">
 							비밀번호 찾기
 						</a> */}
-						<a href="#" className="txt2">
+						{/* <a href="#" className="txt2">
 							&nbsp; <b><Link to={`/auth/login`} className={cx("description")}>
           로그인
         </Link></b>
-						</a>
+						</a> */}
 					</div>
           <div className={cx("error")}>
         {error.triggered && (
@@ -259,6 +315,7 @@ const RegisterForm = ({
           <div className={cx("message")}>{errorMessage2}</div>
         
       </div>
+        {'　'}
 					<div className="container-login100-form-btn">
 						<div className="wrap-login100-form-btn">
 							<div className="login100-form-bgbtn"></div>
@@ -286,8 +343,8 @@ const RegisterForm = ({
 					</div> */}
 
 					<div className="flex-col-c p-t-55">
-						<a href="/" className="txt2">
-							첫화면으로 돌아가기
+						<a href="/auth/login" className="txt2">
+							로그인 화면으로 가기
 						</a>
 					</div>
 				</form>

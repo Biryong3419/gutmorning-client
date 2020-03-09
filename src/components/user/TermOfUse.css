@@ -1,17 +1,21 @@
 .tou-container {
-    margin-top : 200px;
     margin-bottom : 200px;
-    width: 50%;
-    left:24%;
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
     position:relative;
 }
-
+.top-margin{
+    margin-top : 100px;
+}
 
 .tou-btn {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
     padding: 15px 32px;
+    left:43%;
+    position:absolute;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -24,3 +28,27 @@
     font-size : 18px;
     font-weight: 900;
 }
+
+@media (max-width: 992px) {
+  .tou-container {
+    margin-top : 150px;
+    margin-bottom : 200px;
+    width: auto;
+    left:auto;
+    margin-left:5px;
+    margin-right:5px;
+    position:relative;
+}
+}
+
+@media (max-width: 576px) {
+  .tou-container {
+    margin-top : 150px;
+    margin-bottom : 200px;
+    width: auto;
+    left:auto;
+    margin-left:5px;
+    margin-right:5px;
+    position:relative;
+}
+} 

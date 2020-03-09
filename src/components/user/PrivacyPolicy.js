@@ -4,11 +4,21 @@ import './PrivacyPolicy.css';
 export class PrivacyPolicy extends Component {
     render () {
         const msg = '개인정보처리방침';
+        const current_url = window.location.href;
+            let clostButtonForSimpleMode
+        let topMargin = <div className='top-margin'>{'　'}</div>
+        
+        if("simple"== current_url.split('://')[1].split("/")[1]){
+            clostButtonForSimpleMode = <div><div>{'　'}</div>
+                <div>{'　'}</div><button onClick={()=>window.close()} className='tou-btn'>닫기</button></div>;
+
+            topMargin = '';
+        }
         return (
             <div className = 'pp-container'>
-               
+                 {topMargin}
                 <div className='new-line text-left center-block pp-inner-container'>
-                     <h1>{msg}</h1>
+                     <h1 className='text-center'>{msg}</h1>
                     {`
                     
                     주식회사 어큐진(이하 '회사')는 개인정보 보호법 제30조, 정보통신망 이용촉진 및 정보보호 등에 관한 법률 제27조의2 에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원할하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개 합니다.
@@ -125,8 +135,10 @@ export class PrivacyPolicy extends Component {
 
                     <p className='pp-p'>9. 개인정보 처리방침 변경</p>
                        {/* 나. 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다. */}
-                    {`이 개인정보 처리방침은 2020. 03. 06부터 적용됩니다.
+                    {`이 개인정보 처리방침은 2020년 03월 06일부터 적용됩니다.
                     `}
+
+                             {clostButtonForSimpleMode}
                        {/* <button className = 'pp-btn' onClick={()=>this.props.history.push('/auth/login')}>로그인 하기</button> */}
                 </div>
             </div>
