@@ -4,27 +4,31 @@ import * as authActions from '../store/modules/auth';
 import { withRouter } from 'react-router-dom';
 
 export class BaseContainer extends Component {
-    state = {
-        nickname: ''
-    }
+ 
     constructor(props) {
         super(props)
+        this.state = {
+        }  
     }
-
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.logged !== this.props.logged && !this.props.logged) {
-            window.location.href = '/auth/login';
-        }
-        const { logged, logout } = this.props;
-        if(!logged){
-            logout();
-        }
+            if (prevProps.logged !== this.props.logged && !this.props.logged) {
+                console.log(this.props.statusCode)
+                //33코드 : 탈퇴 완료 페이지로 이동
+                if (this.props.statusCode == 33) {
+                    window.location.href = '/auth/confirm/delete'
+                }else {
+                    window.location.href = '/auth/login';
+                }
+            }
+            const { logged, logout } = this.props;
+                if(!logged){
+                    logout();
+                }
     }
 
-    componentDidMount() {
-            this.checkUser();
+    componentWillMount() {
+           this.checkUser()
     }
-
     checkUser() {
         const { checkUser, setUserTemp, history, logout } = this.props;
         // 먼저 localStorage에 값이 저장되있는지 확인, 
@@ -42,6 +46,7 @@ export class BaseContainer extends Component {
             if (userInfo.token){
                 //토큰생성시각 체크해서 기준 시간이 지났을경우 logout 진행.
                 checkUser();
+            
             }else {
                 logout();
             }
@@ -61,8 +66,8 @@ export class BaseContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    logged: state.auth.logged
-    
+    logged: state.auth.logged,
+    statusCode : state.auth.statusCode,
 });
 
 const mapDispatchToProps = dispatch => {

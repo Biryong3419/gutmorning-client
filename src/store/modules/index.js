@@ -8,4 +8,5 @@ export const rootEpics = combineEpics(
   authEpics.registerEpic,
   authEpics.checkUserEpic,
   authEpics.logoutEpic,
+  authEpics.updateUserEpic
 );

@@ -1,0 +1,26 @@
+.tou-container {
+    margin-top : 200px;
+    margin-bottom : 200px;
+    width: 50%;
+    left:24%;
+    position:relative;
+}
+
+
+.tou-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.tou-p {
+    color : black;
+    font-size : 18px;
+    font-weight: 900;
+}

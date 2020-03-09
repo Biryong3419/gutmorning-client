@@ -1,0 +1,27 @@
+.ff-container {
+    margin-top : 250px;
+    margin-bottom : 250px;
+}
+
+.ff-btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.email-box {
+    width: 400px;
+}
+
+
+@media (max-width: 576px) {
+  .email-box {
+    width: 300px;
+  }
+} 

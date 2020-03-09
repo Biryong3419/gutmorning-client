@@ -27,22 +27,7 @@ class Footer extends Component {
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
-{/* 
-            <h4>Abou Us</h4>
-
-            <ul className="list-unstyled">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Features item</a></li>
-              <li><a href="#">Live streaming</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
+          {/* <div className="list-menu">
 
             <h4>Abou Us</h4>
 
@@ -53,11 +38,26 @@ class Footer extends Component {
               <li><a href="#">Privacy Policy</a></li>
             </ul>
 
-          </div>
+          </div> */}
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
+          {/* <div className="list-menu">
+
+            <h4>Abou Us</h4>
+
+            <ul className="list-unstyled">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Features item</a></li>
+              <li><a href="#">Live streaming</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+
+          </div> */}
+        </div>
+
+        <div className="col-sm-6 col-md-3 col-lg-2">
+          {/* <div className="list-menu">
 
             <h4>Support</h4>
 
@@ -68,20 +68,18 @@ class Footer extends Component {
               <li><a href="#">Privacy Policy</a></li>
             </ul>
 
-          </div>
+          </div> */}
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
           <div className="list-menu">
 
-            <h4>Abou Us</h4>
+            {/* <h4>Abou Us</h4> */}
 
             <ul className="list-unstyled">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Features item</a></li>
-              <li><a href="#">Live streaming</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul> */}
+              <li><a href="/user/pp">개인정보처리방침</a></li>
+              <li><a href="/user/tou">이용약관</a></li>
+            </ul>
 
           </div>
         </div>

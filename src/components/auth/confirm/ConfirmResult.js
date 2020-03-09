@@ -14,6 +14,9 @@ export class ConfirmResult extends Component {
             else if ('wrong' === params.message) {
                 msg = '잘못된 요청 입니다.';
             }
+            else if ('newpass' === params.message) {
+                msg = '새 비밀번호가 발급되었습니다. 이메일을 확인해 주세요.';
+            }
         }
 
         return (

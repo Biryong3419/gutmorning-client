@@ -4,10 +4,45 @@ import styles from "./Header.scss";
 import classNames from "classnames/bind";
 import { Basename } from 'config';
 
-
 const cx = classNames.bind(styles);
 class Header extends Component {
-   render () {
+ myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+componentDidMount () {
+    // Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+}
+
+render () {
+    let userControlUi
+    let loginOrLogout = '로그인'
+    if (this.props.loginStatus)
+      loginOrLogout='로그아웃'
+    if ('로그아웃' == loginOrLogout) {
+        userControlUi = 
+        <div className="dropdown">
+                <img height='30' src={require('assets/img/user-icon.png')} onClick={this.myFunction} alt="img" className="dropbtn"/>
+        <div id="myDropdown" className="dropdown-content">
+            <a href="/user/info">내정보</a>
+       <a className='cursor-activate' onClick={this.props.onLoginOut}>{loginOrLogout}</a>
+        </div>  
+    </div>
+    } else if('로그인' == loginOrLogout) {
+        userControlUi =   <a className='cursor-activate' onClick={this.props.onLoginOut}>{loginOrLogout}</a>
+    }
+
     // Disable header
     // if(window.location.pathname==='/auth/login' || window.location.pathname==='/auth/register'){
     //     return null;
@@ -31,7 +66,7 @@ class Header extends Component {
                   {/* <li><a href="kit.html"><b>Kit검사</b></a></li> */}
                   <li><Link to="kit"><b>Kit검사</b></Link></li>
                   <li><a href="http://gutmorning.co.kr/wp/"><b>마이크로바이옴 소식</b></a></li>
-                  <li><a className='loginAnchor' onClick={this.props.onLoginOut}>{this.props.loginStatus}</a></li>
+                  <li>{userControlUi}</li>
               </ul> 
              
           </nav>

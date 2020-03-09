@@ -91,7 +91,7 @@ const RegisterForm = ({
     if(!isPasswordValid) {
       setErrorMessage2('비밀번호 형식을 확인해 주세요.');
       setTimeout(()=> {
-        setErrorMessage2('비밀번호 형식을 확인해 주세요.');
+        setErrorMessage2('');
      }, 3000)
       return;
     }

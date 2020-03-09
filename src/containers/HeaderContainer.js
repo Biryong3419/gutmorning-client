@@ -6,7 +6,12 @@ import { useAlert } from 'react-alert'
 import { withRouter } from 'react-router';
 
 export class HeaderContainer extends Component {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            logged: false
+        }
+    }
 
     handleLoginOut = () => {
         const { logout } = this.props;
@@ -17,21 +22,11 @@ export class HeaderContainer extends Component {
             let path = `/auth/login`;
             this.props.history.push(path);
         }
-        
-       
     };
+
     render() {
         const { handleLoginOut } = this;
-        const { logged } = this.props;
-        let loginStatus = "로그인";
-        if (logged) {
-            
-            loginStatus = "로그아웃";
-        }else {
-            loginStatus = "로그인";
-        }
-
-        return <Header onLoginOut={handleLoginOut} loginStatus={loginStatus}/>;
+        return <Header onLoginOut={this.handleLoginOut} loginStatus={this.props.logged}/>;
     }
 }
 

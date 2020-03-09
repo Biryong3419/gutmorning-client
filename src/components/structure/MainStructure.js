@@ -7,13 +7,14 @@ import Footer from '../../components/structure/Footer';
 
 const cx = classNames.bind(styles);
 
-const MainStructure = ({ children }) => (
+const MainStructure = ({ children }) => {
+    return (
     <div>
         <BaseContainer />
         <HeaderContainer/>
         <main>{children}</main>
         <Footer/>
     </div>
-);
+)};
 
 export default MainStructure;

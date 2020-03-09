@@ -14,12 +14,22 @@ const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 
 const INITIALIZE_ERROR = 'auth/INITIALIZE_ERROR';
 const INITIALIZE_INPUT = 'auth/INITIALIZE_INPUT';
+const INITIALIZE_STATUS_CODE = 'auth/INITIALIZE_STATUS_CODE';
+const UPDATE_STATUS_CODE = 'auth/INITIALIZE_LOGGED';
 
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
 
 const CHECK_USER = 'auth/CHECK_USER';
 const CHECK_USER_SUCCESS = 'auth/CHECK_USER_SUCCESS';
 const CHECK_USER_FAILURE = 'auth/CHECK_USER_FAILURE';
+
+const UPDATE_USER='auth/UPDATE_USER';
+const UPDATE_USER_SUCCESS = 'auth/UPDATE_USER_SUCCESS'
+const UPDATE_USER_FAILURE = 'auth/UPDATE_USER_FAILURE'
+
+const DELETE_USER='auth/DELETE_USER';
+const DELETE_USER_SUCCESS = 'auth/DELETE_USER_SUCCESS';
+const DELETE_USER_FAILURE = 'auth/DELETE_USER_FAILURE';
 
 const SET_USER_TEMP = 'auth/SET_USER_TEMP';
 
@@ -31,6 +41,8 @@ const initialState = {
     form: {
       username: "",
       password: "",
+      currentPassword:"",
+      newPassword:"",
     },
     error: {
       triggered: false,
@@ -45,9 +57,30 @@ const initialState = {
       token: null
     }
   };
+export const updateUser = ({currentPassword, newPassword}) => ({
+    type: UPDATE_USER,
+    payload: {
+        currentPassword,
+        newPassword,
+    }
+});
+export const updateUserSuccess = () => ({
+    type: UPDATE_USER_SUCCESS,
+});
 
-export const logout = () => (
-    {
+export const deleteUser = () => ({
+    type: DELETE_USER,
+});
+
+export const deleteUserSuccess = () => ({
+    type: DELETE_USER_SUCCESS,
+});
+
+export const deleteUserFailure = () => ({
+    type: DELETE_USER_FAILURE,
+})
+
+export const logout = () => ({
     type: LOGOUT
 });
 
@@ -58,8 +91,6 @@ export const logoutSuccess = () => ({
 export const logoutFailure = () => ({
     type: LOGOUT_FAILURE
 });
-
-
 
 export const checkUser = () => ({
     type: CHECK_USER
@@ -97,6 +128,7 @@ export const registerSuccess = ({ user, token }) => ({
         token
     }
 });
+
 export const registerSuccess2 = ({registered, user}) => ({
     type: REGISTER_SUCCESS,
     payload: {
@@ -135,6 +167,29 @@ export const initializeError = () => ({
     type: INITIALIZE_ERROR
 })
 
+export const initializeInput = () => ({
+    type : INITIALIZE_INPUT
+});
+
+export const changeInput= ({name, value}) => ({
+    type: CHANGE_INPUT,
+    payload: {
+        name,
+        value
+    }
+});
+
+export const initializeStatusCode = () => ({
+    type: INITIALIZE_STATUS_CODE
+})
+
+export const updateStatusCode = statusCode => ({
+    type: UPDATE_STATUS_CODE,
+    payload: {
+        statusCode
+    }
+})
+
 const logoutEpic = (action$, state$) => {
     return action$.pipe(
         ofType(LOGOUT),
@@ -148,9 +203,8 @@ const logoutEpic = (action$, state$) => {
                 type = userInfo.type;
             }   
             if (token == null || type == 'naver'){
-                   
-                    localStorage.removeItem('userInfo');
-                    return of(logoutSuccess());
+                localStorage.removeItem('userInfo');
+                return of(logoutSuccess());
             }else {
                 return ajax
                 .post(
@@ -164,16 +218,20 @@ const logoutEpic = (action$, state$) => {
                 )
                 .pipe(
                     map(response => {
+                        console.log('11')
                         // success시 localStorage에서 userInfo 삭제.
                         localStorage.removeItem('userInfo');
                         return logoutSuccess();
                     }),
                     catchError(error => {
-                        of({
-                            type: LOGIN_FAILURE,
-                            payload: error,
-                            error: true
-                        });
+                        console.log('22')
+                        localStorage.removeItem('userInfo');
+                        return of(logoutSuccess());
+                        // of({
+                        //     type: LOGIN_FAILURE,
+                        //     payload: error,
+                        //     error: true
+                        // });
                     })
                 );
             }
@@ -182,7 +240,6 @@ const logoutEpic = (action$, state$) => {
 }
 
 const checkUserEpic = (action$, state$) => {
-    console.log(action$)
     return action$.pipe(
         ofType(CHECK_USER),
         withLatestFrom(state$),
@@ -191,7 +248,7 @@ const checkUserEpic = (action$, state$) => {
             if (localStorage.getItem('userInfo')) {
                 userInfo = JSON.parse(localStorage.getItem('userInfo'));
             }   
-            if(userInfo.token != null || userInfo.loginType == 'naver'){
+            if(userInfo.loginType != null && userInfo.loginType == 'naver'){
             //     const code=userInfo.token;
 
             //    // console.log(NaverConfigs.NaverTokenUrl+`?grant_type=${grant_type}&client_id=${client_id}&client_secret=${client_secret}&refresh_token=${refresh_token}`)
@@ -226,7 +283,7 @@ const checkUserEpic = (action$, state$) => {
                 return of();
             }else {
                 return ajax
-                .get(ApiUrl+`/api/auth/user/`, {
+                .get(ApiUrl+`/api/auth/user/check/`, {
                     'Content-Type': 'application/json',
                     Authorization: `token ${userInfo.token}`
                 })
@@ -234,12 +291,14 @@ const checkUserEpic = (action$, state$) => {
                     map(response => {
                         return checkUserSuccess();
                     }),
-                    catchError(error =>
-                        of({
+                    catchError(error => {
+                        localStorage.removeItem('userInfo');
+                        return of({
                             type: CHECK_USER_FAILURE,
                             payload: error,
                             error: true
-                        }))
+                        })
+                    })
                 );
             }
         })
@@ -294,18 +353,36 @@ const loginEpic = (action$, state$) => {
       })
     );
   };
+  const updateUserEpic = (action$, state$) => {
+    return action$.pipe(
+      ofType(UPDATE_USER),
+      withLatestFrom(state$),
+      mergeMap(([action, state]) => {
+        const { currentPassword, newPassword } = state.auth.form;
+        let userInfo = null;
+        if (localStorage.getItem('userInfo')) {
+            userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        }   
+        const config = {'Content-Type': 'application/json', Authorization: `token ${userInfo.token}`}
+        return ajax.put(ApiUrl+'/api/auth/user/', 
+        {currentPassword, newPassword },
+        config).pipe(
+          map(response => {
+              return updateUserSuccess();
+          }),
+          catchError(error => {
+            return   of({
+                type: UPDATE_USER_FAILURE,
+                payload: error,
+                error: true
+              })
+          }
+          )
+        );
+      })
+    );
+  };
 
-export const initializeInput = () => ({
-    type : INITIALIZE_INPUT
-});
-
-export const changeInput= ({name, value}) => ({
-    type: CHANGE_INPUT,
-    payload: {
-        name,
-        value
-    }
-});
 
 
 
@@ -319,6 +396,7 @@ export const auth = (state = initialState, action) => {
                 password: ""
             }
         };
+
         case CHANGE_INPUT:
             let newForm = state.form;
             newForm[action.payload.name] = action.payload.value;
@@ -334,6 +412,16 @@ export const auth = (state = initialState, action) => {
                 message: ""
             }
         };
+        case INITIALIZE_STATUS_CODE:
+            return {
+                ...state,
+                statusCode: 0
+            }
+        case UPDATE_STATUS_CODE:
+            return {
+                ...state,
+                statusCode: action.payload.statusCode
+            }
         case REGISTER_SUCCESS:
             console.log('register successed')
             return {
@@ -426,6 +514,7 @@ export const auth = (state = initialState, action) => {
         case CHECK_USER_SUCCESS:
             return {
                 ...state,
+                logged: true
             };
         case CHECK_USER_FAILURE:
             return {
@@ -467,6 +556,28 @@ export const auth = (state = initialState, action) => {
                     message: "LOGOUT ERROR, PLEASE TRY AGAIN"
                 }
             }
+
+        case UPDATE_USER:
+            return {
+                ...state,
+                 form: {
+                     currentPassword: action.payload.currentPassword,
+                     newPassword: action.payload.newPassword
+                 }
+            }
+        
+        case UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                statusCode: 200,
+            }
+        
+        case UPDATE_USER_FAILURE:
+            return {
+                ...state,
+                statusCode: 400,
+            }
+
         default:
             return state;
     }
@@ -477,4 +588,5 @@ export const authEpics = {
     loginEpic,
     checkUserEpic,
     logoutEpic,
+    updateUserEpic,
 };
