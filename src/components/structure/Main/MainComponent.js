@@ -12,7 +12,7 @@ import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
 //css
-import './MainComponent.css';
+
 // Bootstrap css
 //import 'lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
@@ -24,7 +24,7 @@ import 'lib/animate/animate.css'
 import 'lib/modal-video/css/modal-video.min.css'
 // Main Style
 import 'assets/css/responsive.css'
-
+import './MainComponent.css';
 
 class Main extends Component {
 
@@ -53,7 +53,7 @@ class Main extends Component {
             <main>
                 <MetaTags>
                
-                    <title>GutMorning</title>
+                    <title>Gut Morning</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                     <meta name="keywords" content=""/>
                     <meta name="description" content="" />
@@ -75,7 +75,7 @@ class Main extends Component {
                 <section id="mathcing" className="padd-section text-center wow fadeInUp">
                     <div className="container">
                         <div className="section-title text-center">
-                            <h2 >맞춤 솔루션</h2>
+                            <h2>맞춤 솔루션</h2>
                         </div>
                     </div>
 	                <section id="advanced-features">
@@ -120,7 +120,7 @@ class Main extends Component {
                     <div className="container">
                         <div className="section-title text-center">
                             <h2 >추천대상</h2>
-                            <p className="separator">▼ 이런 분들께 Gutmorning 장내미생물 분석을 추천합니다. ▼</p>
+                            <p className="separator">▼ 이런 분들께 Gu tmorning 장내미생물 분석을 추천합니다. ▼</p>
                         </div>
                     </div>
 

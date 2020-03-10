@@ -33,9 +33,10 @@ render () {
     if ('로그아웃' == loginOrLogout) {
         userControlUi = 
         <div className="dropdown">
-                <img height='30' src={require('assets/img/user-icon.png')} onClick={this.myFunction} alt="img" className="dropbtn"/>
+                 <img height='30' src={require('assets/img/user-icon.png')} onClick={this.myFunction} alt="img" className="dropbtn"/>
         <div id="myDropdown" className="dropdown-content">
             <a href="/user/info">내정보</a>
+            <a href="/user/info">검사 결과 확인</a>
        <a className='cursor-activate' onClick={this.props.onLoginOut}>{loginOrLogout}</a>
         </div>  
     </div>
@@ -50,13 +51,13 @@ render () {
     return (<div id="header" className="header header-hide">
       <div className="container">
           <div id="logo" className="pull-left">
-              <h1><a href={Basename+"/#hero"} className="scrollto">GutMorning</a></h1>
+              <h1><a href={Basename+"/#hero"} className="scrollto">Gut Morning</a></h1>
               {/* Uncomment below if you prefer to use an image logo
               <a href="#body"><img src="img/logo.png" alt="" title="" /></a> */}
           </div>
           <nav id="nav-menu-container">
               <ul className="nav-menu">
-                  <li className="menu-active"><a href={Basename+"/#hero"}>GutMorning</a></li>
+                  <li className="menu-active"><a href={Basename+"/#hero"}>Gut Morning</a></li>
                   {/* <li><a href="#about-us">About</a></li> */}
                   <li><a href={Basename+"/#mathcing"}>맞춤솔루션</a></li>
                   <li><a href={Basename+"/#features"}>추천대상</a></li>
