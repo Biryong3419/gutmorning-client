@@ -11,6 +11,10 @@ import {WOW} from 'wowjs'
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
+<<<<<<< HEAD
+=======
+//css
+>>>>>>> cddb70d5622dbc3a30e06218be4437900edb16a3
 
 // Bootstrap css
 //import 'lib/bootstrap/css/bootstrap.css'
@@ -23,8 +27,11 @@ import 'lib/animate/animate.css'
 import 'lib/modal-video/css/modal-video.min.css'
 // Main Style
 import 'assets/css/responsive.css'
+<<<<<<< HEAD
 
 //css
+=======
+>>>>>>> cddb70d5622dbc3a30e06218be4437900edb16a3
 import './MainComponent.css';
 
 class Main extends Component {
@@ -54,7 +61,7 @@ class Main extends Component {
             <main>
                 <MetaTags>
                
-                    <title>GutMorning</title>
+                    <title>Gut Morning</title>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                     <meta name="keywords" content=""/>
                     <meta name="description" content="" />
@@ -121,7 +128,7 @@ class Main extends Component {
                     <div className="container">
                         <div className="section-title text-center">
                             <h2 >추천대상</h2>
-                            <p className="separator">▼ 이런 분들께 Gutmorning 장내미생물 분석을 추천합니다. ▼</p>
+                            <p className="separator">▼ 이런 분들께 Gu tmorning 장내미생물 분석을 추천합니다. ▼</p>
                         </div>
                     </div>
 

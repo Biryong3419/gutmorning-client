@@ -169,9 +169,9 @@ const AuthForm = ({
 					</div>
 					
 					<div className="text-right p-t-8 p-b-31">
-						<a href="#">
+						<Link to={`/auth/find`}>
 							비밀번호 찾기
-						</a>
+						</Link>
 						<a href="#" className="txt2">
 							&nbsp; <b><Link to={`/auth/register`} className={cx("description")}>
           회원가입
@@ -201,7 +201,11 @@ const AuthForm = ({
 
 					<div className="flex-c-m">
 
-							<button><img className="login100-form-btn" onClick={loginToNaverID} src={require('assets/img/NAVER.svg')} alt="Naver"/>
+							<button><img className="login100-form-btn" 
+              onClick=
+              {()=>alert('점검 중 입니다.')}
+              //{loginToNaverID} 
+              src={require('assets/img/NAVER.svg')} alt="Naver"/>
 							</button>
 					</div>
 

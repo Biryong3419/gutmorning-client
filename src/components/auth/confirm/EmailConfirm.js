@@ -40,7 +40,7 @@ export class EmailConfirm extends Component {
     }
     componentWillMount() {
         if (!this.props.location.state || !this.props.location.state.username){
-            this.props.history.goBack();
+            this.props.history.push('/auth/login');
         }
     }
     render () {

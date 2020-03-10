@@ -16,7 +16,7 @@ class Footer extends Component {
         <div className="col-md-12 col-lg-4">
           <div className="footer-logo">
 
-            <a className="navbar-brand" href="#">Gutmorning</a>
+            <a className="navbar-brand" href="#">Gut Morning</a>
             {/* <p>문의 032-715-7904 <br>팩스 032-555-3629<br>메일 gutmorning2018@gmail.com</p> */}
             <p className='new-line'>{
             `문의 032-715-7904
@@ -27,22 +27,7 @@ class Footer extends Component {
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
-{/* 
-            <h4>Abou Us</h4>
-
-            <ul className="list-unstyled">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Features item</a></li>
-              <li><a href="#">Live streaming</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
+          {/* <div className="list-menu">
 
             <h4>Abou Us</h4>
 
@@ -53,11 +38,26 @@ class Footer extends Component {
               <li><a href="#">Privacy Policy</a></li>
             </ul>
 
-          </div>
+          </div> */}
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
-          <div className="list-menu">
+          {/* <div className="list-menu">
+
+            <h4>Abou Us</h4>
+
+            <ul className="list-unstyled">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Features item</a></li>
+              <li><a href="#">Live streaming</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+
+          </div> */}
+        </div>
+
+        <div className="col-sm-6 col-md-3 col-lg-2">
+          {/* <div className="list-menu">
 
             <h4>Support</h4>
 
@@ -68,30 +68,26 @@ class Footer extends Component {
               <li><a href="#">Privacy Policy</a></li>
             </ul>
 
-          </div>
+          </div> */}
         </div>
 
         <div className="col-sm-6 col-md-3 col-lg-2">
           <div className="list-menu">
 
-            <h4>Abou Us</h4>
+            {/* <h4>Abou Us</h4> */}
 
             <ul className="list-unstyled">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Features item</a></li>
-              <li><a href="#">Live streaming</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-            </ul> */}
-
+              <li><a href="/user/pp">개인정보처리방침</a></li>
+              <li><a href="/user/tou">이용약관</a></li>
+            </ul>
           </div>
         </div>
-
       </div>
     </div>
 
     <div className="copyrights">
       <div className="container">
-        <p>&copy; Copyrights Gutmorning. All rights reserved.</p>
+        <p>&copy; Copyrights Gut Morning. All rights reserved.</p>
         <div className="credits">
           
             {/* All the links in the footer should remain intact.
