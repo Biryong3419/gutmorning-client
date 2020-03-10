@@ -11,14 +11,11 @@ import {WOW} from 'wowjs'
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
-<<<<<<< HEAD
-=======
-//css
->>>>>>> cddb70d5622dbc3a30e06218be4437900edb16a3
-
 // Bootstrap css
 //import 'lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
+//css
+import './MainComponent.css';
 import 'lib/nivo-slider/css/nivo-slider.css'
 import 'lib/owlcarousel/assets/owl.carousel.css'
 import 'lib/owlcarousel/assets/owl.theme.default.css'
@@ -27,12 +24,8 @@ import 'lib/animate/animate.css'
 import 'lib/modal-video/css/modal-video.min.css'
 // Main Style
 import 'assets/css/responsive.css'
-<<<<<<< HEAD
 
-//css
-=======
->>>>>>> cddb70d5622dbc3a30e06218be4437900edb16a3
-import './MainComponent.css';
+
 
 class Main extends Component {
 
