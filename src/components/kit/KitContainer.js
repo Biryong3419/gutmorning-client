@@ -3,33 +3,46 @@ import React from "react";
 
 //import "./KitContainer.css";
 
+import 'lib/owlcarousel/assets/owl.carousel.min.css'
+import 'lib/font-awesome/css/font-awesome.min.css'
+import 'lib/modal-video/css/modal-video.min.css'
+import 'assets/vendor/bootstrap/css/bootstrap.min.css'
+import 'assets/vendor/venobox/venobox.css'
+import 'assets/vendor/aos/aos.css'
+import 'assets/vendor/venobox/venobox.css'
+import 'assets/vendor/aos/aos.css'
+
+import './KitContainer.css';
 
 
 
 const KitContainer= () => {
   return (
- <div id="hero" className='container'>
-        		<div className="movie-text">검사소개 동영상</div>
-         			<iframe width="560" height="315" src="https://www.youtube.com/embed/aa_uaZc__c8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  
  
  
 <div className="new">
 
 {/*Video Section*/}
-<section className="why-us text-center wow fadeInU" data-aos="fade-up" date-aos-delay="200">
-            <div className="container-fluid container-full">
-                <div className="section-title text-center">
-                    <h2>키트 사용방법</h2>
-                </div>
-                <div className="row  justify-content-center">
-                    <div className=" video-box">
-                        <img src="assets/img/why-us.png" className="img-fluid" alt=""/>
-                        <a href="https://www.youtube.com/embed/aa_uaZc__c8" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
-                    </div>
-                </div>
-            </div>
- </section>
+
+<section id="screenshots"  className="why-us text-center wow fadeInUp" data-aos="fade-up" date-aos-delay="200">
+      <div className="container-fluid container-full">
+		        <div className="section-title text-center">
+
+		  <h2>키트 사용방법</h2>
+      </div>
+
+        <div className="row  justify-content-center">
+          <div className=" video-box">
+            <img src="assets/img/why-us.png" className="img-fluid" alt=""/>
+            <a href="https://youtu.be/aa_uaZc__c8" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          </div>
+
+        </div>
+
+      </div>
+    </section> 
+
 
 {/*Pricing Table Section*/}
  <section id="pricing" className="padd-section text-center wow fadeInUp">
@@ -105,7 +118,7 @@ const KitContainer= () => {
                 <div className="row">
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="img/svg/01.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/01.svg')}alt="img" className="img-fluid"/>
                             <p>Gut Morning 홈페이지에서
                                 <br/>
                                 키트 신청을 해주세요.</p>
@@ -113,7 +126,7 @@ const KitContainer= () => {
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="img/svg/02.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/02.svg')} alt="img" className="img-fluid"/>
                             <p>신청한  주소지로
                                 <br/>
                                 키트를 수령합니다</p>
@@ -121,7 +134,7 @@ const KitContainer= () => {
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="img/svg/03.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/03.svg')} alt="img" className="img-fluid"/>
                             <p>홈페이지에서 키트를
                                 <br/>
                                 등록 합니다.</p>
@@ -129,7 +142,7 @@ const KitContainer= () => {
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="img/svg/04.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/04.svg')} alt="img" className="img-fluid"/>
                             <p>키트 사용방법을 참고하여
                                 <br/>
                                 채변을 진행 합니다.</p>
@@ -137,7 +150,7 @@ const KitContainer= () => {
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="assets/img/05.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/05.svg')} alt="img" className="img-fluid"/>
                             <p>반송 구성품을 밀봉 후
                                 <br/>
                                 회수 신청을하고,
@@ -147,7 +160,7 @@ const KitContainer= () => {
                     </div>
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src="img/svg/06.svg" alt="img" className="img-fluid"/>
+                            <img src={require('assets/img/06.svg')} alt="img" className="img-fluid"/>
                             <p>약 2~3주후
                                 <br/>
                                 결과를 확인합니다.</p>
@@ -162,7 +175,7 @@ const KitContainer= () => {
  </div>
 
  
- </div>
+ 
 			
   );
 };

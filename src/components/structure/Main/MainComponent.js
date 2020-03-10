@@ -11,8 +11,7 @@ import {WOW} from 'wowjs'
 import ModalVideo from 'modal-video';
 //import '../contactform/contactform.js'
 
-//css
-import './MainComponent.css';
+
 // Bootstrap css
 //import 'lib/bootstrap/css/bootstrap.css'
 //Libraries CSS Files
@@ -25,6 +24,8 @@ import 'lib/modal-video/css/modal-video.min.css'
 // Main Style
 import 'assets/css/responsive.css'
 
+//css
+import './MainComponent.css';
 
 class Main extends Component {
 
@@ -75,7 +76,7 @@ class Main extends Component {
                 <section id="mathcing" className="padd-section text-center wow fadeInUp">
                     <div className="container">
                         <div className="section-title text-center">
-                            <h2 >맞춤 솔루션</h2>
+                            <h2>맞춤 솔루션</h2>
                         </div>
                     </div>
 	                <section id="advanced-features">
