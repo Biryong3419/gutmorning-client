@@ -30,7 +30,7 @@ class KitContainer extends Component {
 
         <div className="row justify-content-center">
           <div className="video-box">
-            <img src="assets/img/why-us.png" className="img-fluid" alt=""/>
+            <img src={require('assets/img/why-us.png')} className="img-fluid gmvideo-thumbnail" alt=""/>
             <a href="https://youtu.be/aa_uaZc__c8" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
           </div>
 
@@ -114,7 +114,7 @@ class KitContainer extends Component {
                 <div className="row">
                     <div className="col-md-6 col-lg-4">
                         <div className="feature-block">
-                            <img src={require('assets/img/01.svg')}alt="img" className="img-fluid"/>
+                            <img height='200px' src={require('assets/img/01.svg')}alt="img" className="img-fluid"/>
                             <p>Gut Morning 홈페이지에서
                                 <br/>
                                 키트 신청을 해주세요.</p>

@@ -67,12 +67,6 @@ span {
   letter-spacing: 1px;
 }
 
-.img-fluid {
-  height: 180px;
-  margin-bottom: 30px;
-  /*width: 180px;*/
-}
-
 .img-biopopup {
   margin-bottom: 30px;
   width: auto;
@@ -1775,4 +1769,17 @@ body.mobile-nav-active #mobile-nav-toggle i {
 
 .hot-to-use-div{
   margin-top : 200px;
+}
+
+
+.img-fluid {
+  height: 250px;
+  margin-bottom: 30px;
+  width: 280px;
+}
+
+
+.gmvideo-thumbnail{
+  width:400px;
+  height:250px;
 }
