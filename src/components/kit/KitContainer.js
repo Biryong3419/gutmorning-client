@@ -1,39 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 
-
-//import "./KitContainer.css";
-
+import 'assets/vendor/venobox/venobox.css'
 import 'lib/owlcarousel/assets/owl.carousel.min.css'
 import 'lib/font-awesome/css/font-awesome.min.css'
 import 'lib/modal-video/css/modal-video.min.css'
 import 'assets/vendor/bootstrap/css/bootstrap.min.css'
-import 'assets/vendor/venobox/venobox.css'
 import 'assets/vendor/aos/aos.css'
-import 'assets/vendor/venobox/venobox.css'
-import 'assets/vendor/aos/aos.css'
-
+import jquery from 'jquery';
 import './KitContainer.css';
+//JavaScript Libraries
 
+class KitContainer extends Component {
+    componentDidMount() {
 
+    }
 
-const KitContainer= () => {
+    render () {
   return (
- 
- 
  
 <div className="new">
 
 {/*Video Section*/}
 
 <section id="screenshots"  className="why-us text-center wow fadeInUp" data-aos="fade-up" date-aos-delay="200">
-      <div className="container-fluid container-full">
+      <div className="container-fluid container-full hot-to-use-div">
 		        <div className="section-title text-center">
-
 		  <h2>키트 사용방법</h2>
       </div>
 
-        <div className="row  justify-content-center">
-          <div className=" video-box">
+        <div className="row justify-content-center">
+          <div className="video-box">
             <img src="assets/img/why-us.png" className="img-fluid" alt=""/>
             <a href="https://youtu.be/aa_uaZc__c8" className="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
           </div>
@@ -178,9 +174,8 @@ const KitContainer= () => {
  
 			
   );
+   };
 };
-
-
 
 
 

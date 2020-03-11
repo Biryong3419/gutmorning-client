@@ -996,6 +996,10 @@ body.mobile-nav-active #mobile-nav-toggle i {
   margin: 0;
 }
 
+#pricing {
+  background-color: #F7F7F7;
+}
+
 /* Pricing Table Section
 --------------------------------*/
 #pricing .block-pricing {
@@ -1769,3 +1773,6 @@ body.mobile-nav-active #mobile-nav-toggle i {
 }
 
 
+.hot-to-use-div{
+  margin-top : 200px;
+}

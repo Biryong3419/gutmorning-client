@@ -147,7 +147,7 @@ const RegisterForm = ({
 
   const handleKeyPress = e => {
     if (e.key === "Enter") {
-        onRegister();
+        handleRegister();
       }
   };
   const handleOnConfirmPassword = e => {
