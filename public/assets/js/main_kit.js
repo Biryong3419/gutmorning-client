@@ -178,3 +178,4 @@
   });
 
 })(jQuery);
+console.log('main_kit load finished')

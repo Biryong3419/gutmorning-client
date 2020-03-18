@@ -6,7 +6,6 @@ import 'lib/font-awesome/css/font-awesome.min.css'
 import 'lib/modal-video/css/modal-video.min.css'
 import 'assets/vendor/bootstrap/css/bootstrap.min.css'
 import 'assets/vendor/aos/aos.css'
-import jquery from 'jquery';
 import './KitContainer.css';
 //JavaScript Libraries
 
