@@ -11,7 +11,7 @@ import './KitContainer.css';
 
 class KitContainer extends Component {
     componentDidMount() {
-
+        
     }
 
     render () {

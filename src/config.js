@@ -6,7 +6,7 @@ const current_ip = arr[0] + "//" + arr[2]
 const Basename = '';
 //  "homepage": "http://lims.accugenelab.co.kr/GutMorning"
 //  "proxy": "http://112.220.73.98:8088",
-const ApiUrl = 'http://112.220.73.98:8900'
+const ApiUrl = 'http://115.91.68.204:8900'
 //const NaverCallbackUrl = 'http://112.220.73.98:8900/api/auth/naver/create'
 
 const NaverCallbackUrl = current_ip+'/auth/naver/callback';
